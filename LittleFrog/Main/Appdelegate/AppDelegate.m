@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [NSThread sleepForTimeInterval:1.0];
-    //友盟接入
+    //友盟接入x
     [self UMengSetting];
     
     self.window = [[UIWindow alloc] initWithFrame:HCScreen];
