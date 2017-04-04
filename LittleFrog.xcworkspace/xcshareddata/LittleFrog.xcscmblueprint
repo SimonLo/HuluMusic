@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "34B7253CE7705AC215C5C120D0705C14522462B3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C5AC8EB8E9CF6E0AB739E9BE5F2007DD28F61FD6" : 9223372036854775807,
+    "34B7253CE7705AC215C5C120D0705C14522462B3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3AA0752F-3446-402D-A197-107494FCFDD4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C5AC8EB8E9CF6E0AB739E9BE5F2007DD28F61FD6" : "",
+    "34B7253CE7705AC215C5C120D0705C14522462B3" : "HuluMusic\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LittleFrog",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LittleFrog.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SimonLo\/HuluMusic",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "34B7253CE7705AC215C5C120D0705C14522462B3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SimonLo\/HuluMusic.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C5AC8EB8E9CF6E0AB739E9BE5F2007DD28F61FD6"
+    }
+  ]
+}

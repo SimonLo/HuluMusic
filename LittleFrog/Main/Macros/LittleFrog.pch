@@ -1,0 +1,63 @@
+//
+//  LittleFrog.pch
+//  LittleFrog
+//
+//  Created by huangcong on 16/4/23.
+//  Copyright © 2016年 HuangCong. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+/*-----header-----*/
+
+#import <UIImageView+WebCache.h>
+#import <MJExtension.h>
+#import <MJRefresh.h>
+#import <Masonry/Masonry.h>
+#import "HCUrl.h"
+#import "HCNetWorkTool.h"
+#import "HCCreatTool.h"
+#import "UIView+distribute.h"
+#import "HCPromptTool.h"
+#import "HCBlurViewTool.h"
+#import "HCMusicIndicator.h"
+/*-----nslog-----*/
+
+#ifdef DEBUG
+
+#define HCLog(...) NSLog(__VA_ARGS__)
+
+#else
+
+#define HCLog(...)
+
+#endif
+
+/*-----screenSize-----*/
+#define HCScreen [[UIScreen mainScreen] bounds]
+
+#define HCScreenWidth HCScreen.size.width
+
+#define HCScreenHeight HCScreen.size.height
+
+/*-----color-----*/
+#define HColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define HCRandomColor HColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define HCMainColor HColor(252,12,68)
+#define HCNumColor HColor(148,145,144)
+#define HCTextColor HColor(45,46,47)
+#define HCArtistColor HColor(110,111,112)
+#define HCTintColor [HCMusicIndicator shareIndicator].tintColor
+/*-----font-----*/
+#define HCTitleFont [UIFont systemFontOfSize:20.0]
+#define HCBigFont [UIFont systemFontOfSize:15.0]
+#define HCMiddleFont [UIFont systemFontOfSize:13.0]
+#define HCSmallFont [UIFont systemFontOfSize:10.0]
+/*-----Spacing-----*/
+#define HCHorizontalSpacing 20
+
+#define HCCommonSpacing 10
+
+#define HCVerticalSpacing 5
+
+#endif
