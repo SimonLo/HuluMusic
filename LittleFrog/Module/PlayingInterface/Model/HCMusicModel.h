@@ -17,7 +17,6 @@
 @property (nonatomic ,copy) NSString *songPicRadio;
 @property (nonatomic ,copy) NSString *songLink;
 @property (nonatomic ,copy) NSString *lrcLink;
-@property (nonatomic ,copy) NSString *share;
 //更高品质
 @property (nonatomic ,copy) NSString *showLink;
 @property (nonatomic ,copy) NSString *songId;

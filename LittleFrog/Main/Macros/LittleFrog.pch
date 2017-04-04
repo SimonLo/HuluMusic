@@ -21,6 +21,7 @@
 #import "HCPromptTool.h"
 #import "HCBlurViewTool.h"
 #import "HCMusicIndicator.h"
+#import "UIView+HCExtension.h"
 /*-----nslog-----*/
 
 #ifdef DEBUG

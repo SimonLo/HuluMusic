@@ -17,6 +17,8 @@
 #import "HCPublicSongDetailModel.h"
 #import <UShareUI/UShareUI.h>
 
+#import "HCSongListContentView.h"
+
 typedef NS_ENUM(NSInteger){
     CicyleMode = 0,
     RandomMode,
@@ -46,13 +48,18 @@ typedef NS_ENUM(NSInteger){
 @property (nonatomic ,weak) UIButton *singleCicyleButton;
 @property (nonatomic ,weak) UIButton *moreChoiceButton;
 
+//播放列表
+@property (nonatomic ,weak) UIView *bgCoverView;
+@property (nonatomic ,weak) HCSongListContentView *songListView;
+
+
 @property (nonatomic ,strong) HCLrcView *lrcView;
 @property (nonatomic, strong) CADisplayLink *lrcTimer;
 
 @property (nonatomic ,strong) AVPlayerItem *playingItem;
 
 @property (nonatomic ,copy) NSMutableArray *songIdArrayM;
-@property (nonatomic ,copy) NSMutableArray<HCPublicSongDetailModel *> *songListArrayM;
+@property (nonatomic ,copy) NSMutableArray *songListArrayM;
 @property (nonatomic ,assign) NSInteger playingIndex;
 
 @property (nonatomic ,assign) playMode playMode;
@@ -401,12 +408,49 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 - (void)clickMoreChoiceButton
 {
     HCLog(@"MoreChoice");
-    [HCPromptTool promptModeText:@"功能完善中" afterDelay:1];
+    [self showSongListContentView];
 }
+
+- (void)showSongListContentView {
+    self.bgCoverView = [HCCreatTool viewWithView:self.view];
+    self.bgCoverView.backgroundColor = [UIColor blackColor];
+    self.bgCoverView.alpha = 0;
+    self.bgCoverView.frame = self.view.bounds;
+    [self.bgCoverView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgViewClicked)]];
+    HCSongListContentView *songListView = [[HCSongListContentView alloc] initWithFrame:CGRectMake(0, HCScreenHeight, HCScreenWidth, HCScreenHeight * 0.6)];
+    songListView.songListArray = self.songListArrayM;
+    songListView.playingIndex = self.playingIndex;
+    songListView.closeButtonClickBlock = ^{
+        [self bgViewClicked];
+    };
+    
+    songListView.didSelectSongBlock = ^(NSInteger index) {
+        [self bgViewClicked];
+        [self changeToDestinateMusic:index];
+    };
+
+    [self.view addSubview:songListView];
+    self.songListView = songListView;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.songListView.frame = CGRectMake(0, HCScreenHeight - HCScreenHeight * 0.6, HCScreenWidth, HCScreenHeight * 0.6);
+        self.bgCoverView.alpha = 0.5;
+    }];
+}
+
+//背景view点击
+- (void)bgViewClicked {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.songListView.y = HCScreenHeight;
+        self.bgCoverView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.bgCoverView removeFromSuperview];
+        [self.songListView removeFromSuperview];
+    }];
+}
+
 - (void)changeMusic:(NSInteger)variable
 {
-    [self removeProgressTimer];
-    [self removeLrcTimer];
     [HCPlayMusicTool stopMusicWithLink:self.currentMusic.songLink];
     switch (self.playMode) {
         case CicyleMode:
@@ -418,10 +462,23 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
         case singleModel:
             break;
     }
+    
+    [self resetTimerAndLoadMusic];
+}
+
+- (void)changeToDestinateMusic:(NSInteger)index{
+    self.playingIndex = index;
+    [self resetTimerAndLoadMusic];
+}
+
+- (void)resetTimerAndLoadMusic {
+    [self removeProgressTimer];
+    [self removeLrcTimer];
     [self loadSongDetail];
     [self addProgressTimer];
     [self addLrcTimer];
 }
+
 - (void)cicyleMusic:(NSInteger)variable
 {
     if (self.playingIndex == self.songIdArrayM.count - 1) {
@@ -459,7 +516,6 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
         NSMutableArray *arrayM = response[@"data"][@"songList"];
         HCLog(@"success");
         self.currentMusic = [HCMusicModel mj_objectWithKeyValues:arrayM.firstObject];
-        self.currentMusic.share = self.songListArrayM[self.playingIndex].share;
         [self settingView];
     } failure:^(id response) {
         
@@ -530,7 +586,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     UIImage *image = self.musicImageView.image;
     UMShareMusicObject *shareObject = [UMShareMusicObject shareObjectWithTitle:musicModel.albumName descr:musicModel.artistName thumImage:image];
     //设置音乐网页播放地址
-    shareObject.musicUrl = musicModel.share;
+    shareObject.musicUrl = [NSString stringWithFormat:@"http://music.baidu.com/song/%@",musicModel.songId];
     shareObject.musicDataUrl = musicModel.songLink;
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;

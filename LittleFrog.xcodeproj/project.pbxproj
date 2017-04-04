@@ -10,6 +10,7 @@
 		610575ED1E93B92F00F80654 /* JCCollectionViewTagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 610575E81E93B92F00F80654 /* JCCollectionViewTagFlowLayout.m */; };
 		610575EE1E93B92F00F80654 /* JCTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 610575EA1E93B92F00F80654 /* JCTagCell.m */; };
 		610575EF1E93B92F00F80654 /* JCTagListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610575EC1E93B92F00F80654 /* JCTagListView.m */; };
+		610575F61E93F44D00F80654 /* HCSongListContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610575F51E93F44D00F80654 /* HCSongListContentView.m */; };
 		6142657D1E90FDB600A3970B /* IPHONE8.png in Resources */ = {isa = PBXBuildFile; fileRef = 6142657C1E90FDB600A3970B /* IPHONE8.png */; };
 		6142659D1E92383900A3970B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659C1E92383900A3970B /* SystemConfiguration.framework */; };
 		6142659F1E92384800A3970B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659E1E92384800A3970B /* CoreTelephony.framework */; };
@@ -88,6 +89,8 @@
 		610575EA1E93B92F00F80654 /* JCTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCTagCell.m; sourceTree = "<group>"; };
 		610575EB1E93B92F00F80654 /* JCTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCTagListView.h; sourceTree = "<group>"; };
 		610575EC1E93B92F00F80654 /* JCTagListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCTagListView.m; sourceTree = "<group>"; };
+		610575F41E93F44D00F80654 /* HCSongListContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSongListContentView.h; sourceTree = "<group>"; };
+		610575F51E93F44D00F80654 /* HCSongListContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSongListContentView.m; sourceTree = "<group>"; };
 		6142657C1E90FDB600A3970B /* IPHONE8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPHONE8.png; sourceTree = "<group>"; };
 		6142659C1E92383900A3970B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6142659E1E92384800A3970B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -253,6 +256,15 @@
 				610575EC1E93B92F00F80654 /* JCTagListView.m */,
 			);
 			path = JCTagListView;
+			sourceTree = "<group>";
+		};
+		610575F01E93E94D00F80654 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				610575F41E93F44D00F80654 /* HCSongListContentView.h */,
+				610575F51E93F44D00F80654 /* HCSongListContentView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8A1A6B071CCB32BF008F6DE1 = {
@@ -558,6 +570,7 @@
 			children = (
 				8A211FB91CCD1A810069DE04 /* Tool */,
 				8A211FA81CCD0B950069DE04 /* Lrc */,
+				610575F01E93E94D00F80654 /* View */,
 				8A211FA41CCD0AC50069DE04 /* Model */,
 				8A211FA01CCD0A530069DE04 /* Controller */,
 			);
@@ -1036,6 +1049,7 @@
 				8ADD7E911CD093CD00999056 /* HCRankSongViewController.m in Sources */,
 				8A211FA71CCD0AD40069DE04 /* HCLrcModel.m in Sources */,
 				610575ED1E93B92F00F80654 /* JCCollectionViewTagFlowLayout.m in Sources */,
+				610575F61E93F44D00F80654 /* HCSongListContentView.m in Sources */,
 				8ADD7E951CD0AA3B00999056 /* HCPublicHeadView.m in Sources */,
 				8A211FD71CCFA82F0069DE04 /* HCRankSongModel.m in Sources */,
 				8A211FD01CCF48D00069DE04 /* HCRankListModel.m in Sources */,
