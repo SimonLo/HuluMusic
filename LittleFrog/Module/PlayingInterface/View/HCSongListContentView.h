@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface HCSongListContentView : UIView
-@property (nonatomic,strong) NSArray *songListArray;
+@property (nonatomic,strong) NSMutableArray *songListArray;
+@property (nonatomic,strong) UIImage *backImage;
 @property (nonatomic,assign) NSInteger playingIndex;
 
 @property (nonatomic,copy) void(^closeButtonClickBlock)(void);
 @property (nonatomic,copy) void(^didSelectSongBlock)(NSInteger index);
+@property (nonatomic,copy) void(^didDeleteSongModelBlock)(NSInteger index);
 
 @end

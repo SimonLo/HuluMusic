@@ -58,8 +58,8 @@ typedef NS_ENUM(NSInteger){
 
 @property (nonatomic ,strong) AVPlayerItem *playingItem;
 
-@property (nonatomic ,copy) NSMutableArray *songIdArrayM;
-@property (nonatomic ,copy) NSMutableArray *songListArrayM;
+@property (nonatomic ,strong) NSMutableArray *songIdArrayM;
+@property (nonatomic ,strong) NSMutableArray *songListArrayM;
 @property (nonatomic ,assign) NSInteger playingIndex;
 
 @property (nonatomic ,assign) playMode playMode;
@@ -80,8 +80,8 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 #pragma mark - getId
 
 - (void)setSongIdArray:(NSMutableArray *)idArray songListArray:(NSMutableArray *)listArray currentIndex:(NSInteger)index {
-    self.songIdArrayM = idArray;
-    self.songListArrayM = listArray;
+    self.songIdArrayM = [idArray mutableCopy];
+    self.songListArrayM = [listArray mutableCopy];
     self.playingIndex = index;
     [self loadSongDetail];
     [self setUpKVO];
@@ -418,8 +418,27 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     self.bgCoverView.frame = self.view.bounds;
     [self.bgCoverView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgViewClicked)]];
     HCSongListContentView *songListView = [[HCSongListContentView alloc] initWithFrame:CGRectMake(0, HCScreenHeight, HCScreenWidth, HCScreenHeight * 0.6)];
+    kWeakself;
+    songListView.didDeleteSongModelBlock = ^(NSInteger index) {
+        //进行模型删除
+        HCPublicSongDetailModel *willDeleteModel = [weakSelf.songListArrayM objectAtIndex:index];
+        NSLog(@"%@",willDeleteModel.title);
+        [weakSelf.songListArrayM removeObjectAtIndex:index];
+        [weakSelf.songIdArrayM removeObjectAtIndex:index];
+        
+        //如果当前播放的歌曲模型被删除，则播放下一首
+        if (willDeleteModel.song_id == weakSelf.currentMusic.songId) {
+            [weakSelf changeMusic:0];
+            weakSelf.songListView.playingIndex = weakSelf.playingIndex;
+        } else if (index < weakSelf.playingIndex){
+            weakSelf.playingIndex -= 1;
+            weakSelf.songListView.playingIndex = weakSelf.playingIndex;
+        }
+        
+    };
     songListView.songListArray = self.songListArrayM;
     songListView.playingIndex = self.playingIndex;
+    songListView.backImage = self.musicImageView.image;
     songListView.closeButtonClickBlock = ^{
         [self bgViewClicked];
     };
@@ -434,7 +453,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     
     [UIView animateWithDuration:0.25 animations:^{
         self.songListView.frame = CGRectMake(0, HCScreenHeight - HCScreenHeight * 0.6, HCScreenWidth, HCScreenHeight * 0.6);
-        self.bgCoverView.alpha = 0.5;
+        self.bgCoverView.alpha = 0.3;
     }];
 }
 
@@ -480,15 +499,22 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 }
 
 - (void)cicyleMusic:(NSInteger)variable
-{
-    if (self.playingIndex == self.songIdArrayM.count - 1) {
-        self.playingIndex = 0;
-    }
-    else if(self.playingIndex == 0){
-        self.playingIndex = self.songIdArrayM.count - 1;
-    }
-    else{
-        self.playingIndex = variable + self.playingIndex;
+{   //下一首
+    if (variable == 1) {
+        if (self.playingIndex == self.songIdArrayM.count - 1) {
+            self.playingIndex = 0;
+        } else {
+            self.playingIndex = variable + self.playingIndex;
+        }
+    //上一首
+    } else if(variable == -1) {
+        if (self.playingIndex == 0) {
+            self.playingIndex = self.songIdArrayM.count - 1;
+        } else {
+            self.playingIndex = variable + self.playingIndex;
+        }
+    } else if(variable == 0) {
+        
     }
 }
 - (void)randomMusic

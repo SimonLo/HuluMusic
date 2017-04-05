@@ -8,6 +8,8 @@
 
 #import "HCSongListContentView.h"
 #import "HCPublicSongDetailModel.h"
+#import "HCPlaySongListCell.h"
+#import "HCBlurViewTool.h"
 
 @interface HCSongListContentView() <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,weak) UITableView *songListTableView;
@@ -19,46 +21,54 @@
 @property (nonatomic ,weak) UILabel *listNum;
 @property (nonatomic ,weak) UIView *topLineView;
 
-
-
 @end
 
 static NSString *const listCellid = @"listCellid";
 
 @implementation HCSongListContentView
 
-- (void)setSongListArray:(NSArray *)songListArray {
-    _songListArray = songListArray;
+- (void)setSongListArray:(NSMutableArray *)songListArray {
+    _songListArray = [songListArray mutableCopy];
     self.listNum.text = [NSString stringWithFormat:@"%zd首",songListArray.count];
     [self.songListTableView reloadData];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.topBriefView = [HCCreatTool viewWithView:self];
+        UIImageView *bgImageView = [HCCreatTool imageViewWithView:self];
+        bgImageView.image = self.backImage;
+        bgImageView.frame = CGRectMake(0,0,HCScreenWidth,HCScreenHeight);
+        [HCBlurViewTool blurView:bgImageView style:UIBarStyleDefault];
+        [self insertSubview:bgImageView atIndex:0];
         
+        self.topBriefView = [HCCreatTool viewWithView:self];
+
         self.playlistText = [HCCreatTool labelWithView:self.topBriefView];
         self.playlistText.text = @"播放列表";
         self.playlistText.textColor = HCTextColor;
         self.playlistText.font = [UIFont systemFontOfSize:14];
         self.listNum = [HCCreatTool labelWithView:self.topBriefView];
         self.listNum.textColor = [UIColor grayColor];
-        self.listNum.font = [UIFont systemFontOfSize:11];
+        self.listNum.font = HCSmallFont;
         self.topLineView = [HCCreatTool viewWithView:self];
-        self.topLineView.backgroundColor = [UIColor grayColor];
+        self.topLineView.backgroundColor = HCGrayColor;
         
         self.bottomCloseBtn = [HCCreatTool buttonWithView:self];
-        [self.bottomCloseBtn setTitle:@"关闭" forState:UIControlStateNormal];
-        [self.bottomCloseBtn setTitleColor:HCTextColor forState:UIControlStateNormal];
+        NSDictionary *dictAttr = @{NSFontAttributeName:HCBigFont,
+                                    NSForegroundColorAttributeName: HCTextColor
+                                    };
+        NSAttributedString *attrStr = [[NSAttributedString alloc]initWithString:@"关闭" attributes:dictAttr];
+        [self.bottomCloseBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         [self.bottomCloseBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
         self.bottomLineView = [HCCreatTool viewWithView:self];
-        self.bottomLineView.backgroundColor = [UIColor grayColor];
+        self.bottomLineView.backgroundColor = HCGrayColor;
         
         UITableView *songListTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        songListTableView.backgroundColor = [UIColor clearColor];
         songListTableView.delegate = self;
         songListTableView.dataSource = self;
-        [songListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:listCellid];
+        songListTableView.tableFooterView = [UIView new];
+        [songListTableView registerClass:[HCPlaySongListCell class] forCellReuseIdentifier:listCellid];
         [self addSubview:songListTableView];
         self.songListTableView = songListTableView;
     }
@@ -74,9 +84,9 @@ static NSString *const listCellid = @"listCellid";
     }];
     
     [self.playlistText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.topBriefView).offset(10);
+        make.left.mas_equalTo(self.topBriefView).offset(15);
         make.centerY.mas_equalTo(self.topBriefView);
-        make.width.mas_equalTo(60);
+        make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(14);
     }];
     
@@ -95,7 +105,7 @@ static NSString *const listCellid = @"listCellid";
     
     [self.bottomCloseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(50);
     }];
     
     [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -128,12 +138,29 @@ static NSString *const listCellid = @"listCellid";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listCellid];
+    HCPlaySongListCell *cell = [tableView dequeueReusableCellWithIdentifier:listCellid];
+    cell.didDeleteSongBlock = ^{
+        HCPublicSongDetailModel *model = [self.songListArray objectAtIndex:indexPath.row];
+        NSLog(@"%@",model.title);
+        
+        [self.songListArray removeObjectAtIndex:indexPath.row];
+        self.listNum.text = [NSString stringWithFormat:@"%zd首",self.songListArray.count];
+        [self.songListTableView reloadData];
+        
+        //告诉播放页面，里面删除掉了模型，外面要同步删除
+        if (self.didDeleteSongModelBlock) {
+            self.didDeleteSongModelBlock(indexPath.row);
+        };
+    };
     
     HCPublicSongDetailModel *model = self.songListArray[indexPath.row];
-    cell.textLabel.text = model.title;
-    cell.textLabel.textColor = self.playingIndex == indexPath.row ? [UIColor blueColor] : [UIColor blackColor];
+    BOOL isPlaying = self.playingIndex == indexPath.row ? YES : NO;
+    [cell updateCellWithDetailModel:model isPlaying:isPlaying andTotalSongCount:self.songListArray.count];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
