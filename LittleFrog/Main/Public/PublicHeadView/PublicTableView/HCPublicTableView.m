@@ -42,7 +42,6 @@ typedef NS_ENUM(NSInteger) {
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
     if (self = [super initWithFrame:frame style:style]) {
-        self.backgroundColor = [UIColor clearColor];
         self.delegate = self;
         self.dataSource = self;
         self.backgroundColor = [UIColor clearColor];
@@ -64,13 +63,17 @@ typedef NS_ENUM(NSInteger) {
 {
     HCPublicSongDetailModel *songDetail = self.songListArrayM[indexPath.row];
     HCPublicTableViewCell *cell = [HCPublicTableViewCell publicTableViewCellcellWithTableView:tableView];
-    cell.backgroundColor = [UIColor clearColor];
     cell.bePic = songDetail.pic_small ? YES : NO;
     cell.menuButton.tag = indexPath.row;
     cell.detailModel = songDetail;
     cell.delegate = self;
     [self updateIndicatorViewOfCell:cell];
     [cell setUpCellMenu];
+    if (self.cellTransparency) {
+        cell.backgroundColor = [UIColor clearColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,6 +101,12 @@ typedef NS_ENUM(NSInteger) {
         }
     }
     [self updateIndicatorViewWithIndexPath:indexPath];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.tableViewDidScrollBlock) {
+        self.tableViewDidScrollBlock(scrollView.contentOffset.y);
+    }
 }
 
 #pragma mark - cellDelegate

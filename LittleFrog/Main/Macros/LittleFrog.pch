@@ -38,6 +38,7 @@
 #define HCScreen [[UIScreen mainScreen] bounds]
 
 #define HCScreenWidth HCScreen.size.width
+#define HCNavigationHeight 64
 
 #define HCScreenHeight HCScreen.size.height
 #define kWeakself  __weak typeof(self) weakSelf = self;

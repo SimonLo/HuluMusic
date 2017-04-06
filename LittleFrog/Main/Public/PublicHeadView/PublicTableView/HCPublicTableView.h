@@ -14,4 +14,7 @@
 
 - (void)setSongList:(NSMutableArray *)list songIds:(NSMutableArray *)ids;
 
+@property (nonatomic ,copy) void(^tableViewDidScrollBlock)(CGFloat offsetY);
+@property (nonatomic ,assign) BOOL cellTransparency;
+
 @end

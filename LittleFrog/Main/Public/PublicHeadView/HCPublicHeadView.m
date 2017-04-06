@@ -21,13 +21,17 @@
 @property (nonatomic ,weak) UIButton *MenuButton;
 
 @property (nonatomic ,weak) UILabel *descLabel;
+@property (nonatomic ,weak) UIView *descBgView;
 
 @property (nonatomic ,assign) BOOL isFullImage;
 @end
 @implementation HCPublicHeadView
 - (void)setMenuList:(HCPublicSonglistModel *)listModel
 {
-    [self.picView sd_setImageWithURL:[NSURL URLWithString:listModel.pic_500]];
+    if (self.isFullImage) {
+    } else {
+        [self.picView sd_setImageWithURL:[NSURL URLWithString:listModel.pic_500]];
+    }
     self.titleLabel.text = listModel.title;
     self.tagLabel.text = listModel.tag;
     self.publisLable.text = [NSString stringWithFormat:@"%@个听众  %@个粉丝",listModel.listenum,listModel.collectnum];
@@ -35,7 +39,10 @@
 }
 - (void)setNewAlbum:(HCPublicSonglistModel *)albumModel
 {
-    [self.picView sd_setImageWithURL:[NSURL URLWithString:albumModel.pic_radio]];
+    if (self.isFullImage) {
+    } else {
+        [self.picView sd_setImageWithURL:[NSURL URLWithString:albumModel.pic_radio]];
+    }
     self.titleLabel.text = albumModel.title;
     self.tagLabel.text = albumModel.author;
     self.publisLable.text = [NSString stringWithFormat:@"%@发行",albumModel.publishtime];
@@ -45,10 +52,10 @@
 - (instancetype)initWithFullHead:(BOOL)full
 {
     if (self = [super init]) {
+        self.isFullImage = full;
         [self setUpHeadView];
         [self setUpButtons];
         [self setUpDescLabel];
-        self.isFullImage = full;
         self.tintColor = HCTintColor;
     }
     return self;
@@ -87,6 +94,13 @@
 }
 - (void)setUpDescLabel
 {
+    self.descBgView = [HCCreatTool viewWithView:self];
+    if (self.isFullImage == YES) {
+        self.descBgView.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.descBgView.backgroundColor = [UIColor clearColor];
+    }
+    
     self.descLabel      = [HCCreatTool labelWithView:self];
     self.descLabel.font = HCMiddleFont;
     self.descLabel.numberOfLines = 0;
@@ -178,6 +192,12 @@
 }
 - (void)layoutDescLabel
 {
+    [self.descBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left);
+        make.bottom.equalTo(self.mas_bottom);
+        make.right.equalTo(self.mas_right);
+        make.height.mas_offset(60);
+    }];
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(HCHorizontalSpacing);
         make.bottom.equalTo(self.mas_bottom);
