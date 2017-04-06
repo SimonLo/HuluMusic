@@ -17,8 +17,6 @@
 
 @end
 
-
-
 @implementation HCPlaySongListCell
 
 - (void)updateCellWithDetailModel:(HCPublicSongDetailModel *)model isPlaying:(BOOL)isPlaying andTotalSongCount:(NSInteger)count {

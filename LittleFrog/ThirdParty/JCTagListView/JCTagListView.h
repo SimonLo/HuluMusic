@@ -15,7 +15,7 @@
 typedef void (^JCTagListViewBlock)(NSInteger index);
 
 IB_DESIGNABLE
-@interface JCTagListView : UITableViewCell
+@interface JCTagListView : UIView
 
 @property (nonatomic, strong) IBInspectable UIColor *tagStrokeColor; // default: lightGrayColor
 @property (nonatomic, strong) IBInspectable UIColor *tagTextColor; // default: darkGrayColor

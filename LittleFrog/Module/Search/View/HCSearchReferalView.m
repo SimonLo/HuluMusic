@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     [self setUpSearchBar];
+    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)setUpSearchBar

@@ -107,7 +107,7 @@
 #pragma mark - loadSearchResult
 - (void)loadSearchResultData:(NSString *)text
 {
-    [HCNetWorkTool netWorkToolGetWithUrl:HCUrl parameters:HCParams(@"method":@"baidu.ting.search.merge",@"page_size":@"50",@"page_no":@"-1",@"type":@"-1",@"query":text) response:^(id response) {
+    [HCNetWorkTool netWorkToolGetWithUrl:HCUrl parameters:HCParams(@"method":@"baidu.ting.search.merge",@"page_size":@"99",@"page_no":@"-1",@"type":@"-1",@"query":text) response:^(id response) {
         HCSearchInfoModel *info = [HCSearchInfoModel mj_objectWithKeyValues:response[@"result"]];
 //        HCSearchInfoModel *artist = [HCSearchInfoModel mj_objectWithKeyValues:info.artist_info];
 //        self.artistListArray = [artist.artist_list mutableCopy];

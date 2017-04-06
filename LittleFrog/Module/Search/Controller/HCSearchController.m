@@ -106,14 +106,25 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//热门
-        JCTagListView *cell = [[JCTagListView alloc] initWithFrame:CGRectMake(0, 0, HCScreenWidth, 150)];
-        cell.tagCornerRadius = 5.0f;
-        cell.canSelectTags = NO;
-        [cell.tags addObjectsFromArray:self.hotSearchArray];
-        [cell setCompletionBlockWithSelected:^(NSInteger index) {
+        static NSString *hotID = @"hotSearchCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:hotID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hotID];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        //移除tagView
+        [[cell subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
+        JCTagListView *tagView = [[JCTagListView alloc] initWithFrame:CGRectMake(0, 0, HCScreenWidth, 150)];
+        tagView.tagCornerRadius = 5.0f;
+        tagView.canSelectTags = NO;
+        [tagView.tags addObjectsFromArray:self.hotSearchArray];
+        [tagView setCompletionBlockWithSelected:^(NSInteger index) {
             HCLog(@"%@",self.hotSearchArray[index]);//点击热门搜索
             [self pushTosearchResultViewWithText:self.hotSearchArray[index]];
         }];
+        
+        [cell addSubview:tagView];
         return cell;
     }
     else{//历史
