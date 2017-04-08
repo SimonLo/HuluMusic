@@ -10,6 +10,7 @@
 #import "HCPublicCollectionCell.h"
 #import "HCPublicMusictablesModel.h"
 #import "HCSongListViewController.h"
+#import "HCRankListController.h"
 @interface HCSongMenuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic ,strong) NSMutableArray *songMenuArrayM;
 @property (nonatomic ,strong) UICollectionView *songMenuCollectionView;
@@ -33,6 +34,17 @@ static NSString *reuseId = @"songMenu";
 {
     [super viewWillAppear:animated];
     self.songMenuCollectionView.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.frame = CGRectMake(0, 0, 20, 20);
+    imageView.image = [UIImage imageNamed:@"songRank_highLighted"];
+    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goSongRank)];
+    [imageView addGestureRecognizer:tapGest];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageView];
+}
+- (void)goSongRank{
+    [self.navigationController pushViewController:[[HCRankListController alloc] init] animated:YES];
 }
 
 - (void)viewDidLoad

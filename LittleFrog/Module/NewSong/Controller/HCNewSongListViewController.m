@@ -78,10 +78,10 @@
     };
     self.tableView = publicTable;
     self.tableView.tableHeaderView = self.headView;
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HCScreenWidth, 50)];
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HCScreenWidth, HCScreenHeight * 0.5)];
     tableFooterView.backgroundColor = [UIColor whiteColor];
     if (headerFullStyle) {
-        self.tableView.contentInset = UIEdgeInsetsMake(HCNavigationHeight, 0, -50, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(HCNavigationHeight, 0, -HCScreenHeight * 0.5, 0);
         self.tableView.tableFooterView = tableFooterView;
     } else {
         self.tableView.contentInset = UIEdgeInsetsZero;

@@ -12,6 +12,7 @@
 @property (nonatomic ,weak) UIImageView *picView;
 @property (nonatomic ,weak) UILabel *titleLabel;
 @property (nonatomic ,weak) UILabel *listenumLabel;
+@property (nonatomic ,weak) UIImageView *listenImage;
 @end
 
 @implementation HCPublicCollectionCell
@@ -19,12 +20,16 @@
 {
     [self.picView sd_setImageWithURL:[NSURL URLWithString:menu.pic_300]];
     self.titleLabel.text = menu.title;
-    self.listenumLabel.text = [NSString stringWithFormat:@"😊%@",menu.listenum];
+    self.listenumLabel.text = menu.listenum;
+    if ([menu.listenum isEqualToString:@""] || menu.listenum == nil) {
+        self.listenImage.hidden = YES;
+    }
 }
 - (void)setNewSongAlbum:(HCPublicMusictablesModel *)newSong
 {
     [self.picView sd_setImageWithURL:[NSURL URLWithString:newSong.pic_big]];
     self.titleLabel.text = [NSString stringWithFormat:@"%@  %@",newSong.author,newSong.title];
+    self.listenImage.hidden = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -40,6 +45,9 @@
         self.listenumLabel = [HCCreatTool labelWithView:self.contentView];
         self.listenumLabel.font = HCBigFont;
         self.listenumLabel.textColor = [UIColor whiteColor];
+        
+        self.listenImage = [HCCreatTool imageViewWithView:self.contentView];
+        self.listenImage.image = [UIImage imageNamed:@"ic_onlinemusic_listen_number"];
     }
     return self;
 }
@@ -56,14 +64,20 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.picView.mas_bottom);
         make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
+        make.right.equalTo(self.mas_right).offset(-10);
         make.height.mas_equalTo(40);
+    }];
+    
+    [self.listenImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(12);
+        make.left.equalTo(self.mas_left).offset(10);
+        make.width.height.mas_equalTo(11);
     }];
     
     [self.listenumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(10);
-        make.left.equalTo(self.mas_left).offset(10);
-        make.right.equalTo(self.mas_right);
+        make.left.equalTo(self.listenImage.mas_right).offset(2);
+        make.right.equalTo(self.mas_right).offset(-10);
         make.height.mas_equalTo(15);
     }];
 }

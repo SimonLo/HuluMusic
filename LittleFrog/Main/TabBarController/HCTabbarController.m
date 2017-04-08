@@ -11,6 +11,7 @@
 #import "HCNewSongController.h"
 #import "HCSearchController.h"
 #import "HCRankListController.h"
+#import "HCMineViewController.h"
 #import "HCNavigationController.h"
 @implementation HCTabbarController
 - (void)viewDidLoad
@@ -22,8 +23,8 @@
     [self addChildViewController:newSong WithTitle:@"新曲" image:@"songNewList_normal" selectedImage:@"songNewList_highLighted"];
     HCSearchController *search = [[HCSearchController alloc] init];
     [self addChildViewController:search WithTitle:@"搜索" image:@"songSearch_normal" selectedImage:@"songSearch_highLighted"];
-    HCRankListController *rankList = [[HCRankListController alloc] init];
-    [self addChildViewController:rankList WithTitle:@"排行" image:@"songRank_normal" selectedImage:@"songRank_highLighted"];
+    HCMineViewController *mine = [[HCMineViewController alloc] init];
+    [self addChildViewController:mine WithTitle:@"我的" image:@"songRank_normal" selectedImage:@"songRank_highLighted"];
 
 }
 

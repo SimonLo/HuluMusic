@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [NSThread sleepForTimeInterval:1.0];
+//    [NSThread sleepForTimeInterval:1.0];
     //友盟接入xx
     [self UMengSetting];
     

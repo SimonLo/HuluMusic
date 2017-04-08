@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "launch.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ic_onlinemusic_listen_number@2x.png",
       "scale" : "2x"
     },
     {

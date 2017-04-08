@@ -133,7 +133,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         }
-        cell.imageView.image = [UIImage imageNamed:@"cm2_list_icn_recent"];
+        cell.imageView.image = [UIImage imageNamed:@"ic_search_history"];
         cell.textLabel.text = self.historyArray[indexPath.row];
         cell.textLabel.textColor = [UIColor grayColor];
         return cell;
