@@ -1,13 +1,13 @@
 //
 //  HCDownLoader.m
-//  HCDownLoadLib
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/26.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
 #import "HCDownLoader.h"
-#import "NSString+HCDownLoader.h"
+#import "NSString+HCMD5.h"
 #import "HCDownLoaderFileTool.h"
 
 #define kCache NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
@@ -42,17 +42,17 @@
 #pragma mark - 接口
 
 + (NSString *)downLoadedFileWithURL: (NSURL *)url {
-
+    
     NSString *cacheFilePath = [kCache stringByAppendingPathComponent:url.lastPathComponent];
-
+    
     if([HCDownLoaderFileTool isFileExists:cacheFilePath]) {
         return cacheFilePath;
     }
     return nil;
-
+    
 }
 + (long long)tmpCacheSizeWithURL: (NSURL *)url {
-
+    
     NSString *tmpFileMD5 = [url.absoluteString md5Str];
     NSString *tmpPath = [kTmp stringByAppendingPathComponent:tmpFileMD5];
     return  [HCDownLoaderFileTool fileSizeWithPath:tmpPath];
@@ -63,25 +63,26 @@
     [HCDownLoaderFileTool removeFileAtPath:cachePath];
 }
 
-- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
+- (void)downLoadWithURL:(NSURL *)url downLoadInfo:(DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success:(DownLoadSuccessType)successBlock failed:(DownLoadFailType)failBlock {
     
     self.downLoadInfo = downLoadBlock;
     self.downLoadSuccess = successBlock;
     self.downLoadError = failBlock;
+    self.downLoadProgress = progressBlock;
+    self.downLoadStateChange = stateBlock;
     
     [self downLoadWithURL:url];
-    
 }
 
 - (void)downLoadWithURL: (NSURL *)url {
-
+    
     self.url = url;
     // 1. 下载文件的存储
     //    下载中 -> tmp + (url + MD5)
     //    下载完成 -> cache + url.lastCompent
     self.cacheFilePath = [kCache stringByAppendingPathComponent:url.lastPathComponent];
     self.tmpFilePath = [kTmp stringByAppendingPathComponent:[url.absoluteString md5Str]];
-
+    
     
     // 1 首先, 判断, 本地有没有已经下载好, 已经下载完毕, 就直接返回
     // 文件的位置, 文件的大小
@@ -129,7 +130,7 @@
 // 暂停了几次, 恢复几次, 才可以恢复
 - (void)resume {
     if (self.state == HCDownLoaderStatePause) {
-       [self.task resume];
+        [self.task resume];
         self.state = HCDownLoaderStateDowning;
     }
 }
@@ -137,11 +138,11 @@
 // 暂停, 暂停任务, 可以恢复, 缓存没有删除
 // 恢复了几次, 暂停几次, 才可以暂停
 - (void)pause {
-     if (self.state == HCDownLoaderStateDowning)
-     {
+    if (self.state == HCDownLoaderStateDowning)
+    {
         [self.task suspend];
-         self.state = HCDownLoaderStatePause;
-     }
+        self.state = HCDownLoaderStatePause;
+    }
     
 }
 
@@ -149,8 +150,8 @@
 - (void)cancel {
     [self.session invalidateAndCancel];
     self.session = nil;
-   
-//    self.state = HCDownLoaderStateFailed;
+    
+    //    self.state = HCDownLoaderStateFailed;
 }
 
 - (void)cancelAndClearCache {
@@ -165,28 +166,28 @@
 
 #pragma mark - 私有方法
 - (void)downLoadWithURL:(NSURL *)url offset: (long long)offset {
-
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:0];
     [request setValue:[NSString stringWithFormat:@"bytes=%lld-", offset] forHTTPHeaderField:@"Range"];
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
     [task resume];
     self.task = task;
-  
+    
     
 }
 
 
-#pragma mark - NSURLSessionDataDelegate 
+#pragma mark - NSURLSessionDataDelegate
 
 
 /**
  当发送的请求, 第一次接受到响应的时候调用,
-
+ 
  @param completionHandler 系统传递给我们的一个回调代码块, 我们可以通过这个代码块, 来告诉系统,如何处理, 接下来的数据
  */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
-
+    
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     _totalFileSize = [httpResponse.allHeaderFields[@"Content-Length"] longLongValue];
     if (httpResponse.allHeaderFields[@"Content-Range"]) {
@@ -198,7 +199,6 @@
     if (self.downLoadInfo) {
         self.downLoadInfo(_totalFileSize);
     }
-    
     
     // 判断, 本地的缓存大小 与 文件的总大小
     // 缓存大小 == 文件的总大小 下载完成 -> 移动到下载完成的文件夹
@@ -262,11 +262,11 @@
         }
     }else {
         NSLog(@"有错误---");
-//        error.code
-//        error.localizedDescription;
+        //        error.code
+        //        error.localizedDescription;
         self.state = HCDownLoaderStateFailed;
         if (self.downLoadError) {
-            self.downLoadError();
+            self.downLoadError(error.localizedDescription);
         }
     }
     
@@ -292,7 +292,7 @@
     if (self.downLoadStateChange) {
         self.downLoadStateChange(state);
     }
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kDownLoadURLOrStateChangeNotification object:nil userInfo:@{
                                                                                                                            @"downLoadURL": self.url,
                                                                                                                            @"downLoadState": @(self.state)

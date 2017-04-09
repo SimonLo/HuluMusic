@@ -1,20 +1,19 @@
 //
 //  HCDownLoadManager.m
-//  HCDownLoadLib
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/27.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
 #import "HCDownLoadManager.h"
-#import "NSString+HCDownLoader.h"
+#import "NSString+HCMD5.h"
 
 @interface HCDownLoadManager()
 
 @property (nonatomic, strong) NSMutableDictionary <NSString *, HCDownLoader *>*downLoadInfo;
 
 @end
-
 
 @implementation HCDownLoadManager
 
@@ -47,7 +46,11 @@ static HCDownLoadManager *_shareInstance;
     return _downLoadInfo;
 }
 
-- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
+- (void)downLoadWithURL: (NSURL *)url progress:(DownLoadProgressType)progressBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
+    [self downLoadWithURL:url downLoadInfo:nil progress:progressBlock state:nil success:successBlock failed:failBlock];
+}
+
+- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
     
     NSString *md5 = [url.absoluteString md5Str];
     
@@ -60,29 +63,26 @@ static HCDownLoadManager *_shareInstance;
     [self.downLoadInfo setValue:downLoader forKey:md5];
     
     __weak typeof(self) weakSelf = self;
-    [downLoader downLoadWithURL:url downLoadInfo:downLoadBlock success:^(NSString *cacheFilePath) {
+    [downLoader downLoadWithURL:url downLoadInfo:downLoadBlock progress:progressBlock state:stateBlock success:^(NSString *cacheFilePath) {
         [weakSelf.downLoadInfo removeObjectForKey:md5];
         if(successBlock) {
             successBlock(cacheFilePath);
         }
-    } failed:^{
+    } failed:^(NSString *errMsg) {
         [weakSelf.downLoadInfo removeObjectForKey:md5];
         if (failBlock) {
-            failBlock();
+            failBlock(errMsg);
         }
     }];
     
+    
     return ;
-
-    
-    
 }
 
-- (HCDownLoader *)downLoadWithURL: (NSURL *)url
-{
+
+- (HCDownLoader *)downLoadWithURL: (NSURL *)url {
     
     // 文件名称  aaa/a.x  bb/a.x
-    
     NSString *md5 = [url.absoluteString md5Str];
     
     HCDownLoader *downLoader = self.downLoadInfo[md5];
@@ -94,14 +94,13 @@ static HCDownLoadManager *_shareInstance;
     [self.downLoadInfo setValue:downLoader forKey:md5];
     
     __weak typeof(self) weakSelf = self;
-    [downLoader downLoadWithURL:url downLoadInfo:nil success:^(NSString *cacheFilePath) {
+    [downLoader downLoadWithURL:url downLoadInfo:nil progress:nil state:nil success:^(NSString *cacheFilePath) {
         [weakSelf.downLoadInfo removeObjectForKey:md5];
-    } failed:^{
+    } failed:^(NSString *errMsg){
         [weakSelf.downLoadInfo removeObjectForKey:md5];
     }];
     
     return downLoader;
-    
 }
 
 - (HCDownLoader *)getDownLoaderWithURL: (NSURL *)url {
@@ -111,11 +110,9 @@ static HCDownLoadManager *_shareInstance;
 }
 
 - (void)pauseWithURL: (NSURL *)url {
-    
     NSString *md5 = [url.absoluteString md5Str];
     HCDownLoader *downLoader = self.downLoadInfo[md5];
     [downLoader pause];
-    
 }
 
 - (void)cancelWithURL: (NSURL *)url {

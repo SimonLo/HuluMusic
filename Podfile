@@ -11,6 +11,7 @@ pod ‘MBProgressHUD’
 pod ‘MJExtension’
 pod 'MJRefresh'
 pod ‘Masonry’
+pod 'FMDB', '~> 2.6.2'
 pod ‘UMengUShare/UI’
 pod ‘UMengUShare/Social/ReducedWeChat'
 pod ‘UMengUShare/Social/ReducedQQ'

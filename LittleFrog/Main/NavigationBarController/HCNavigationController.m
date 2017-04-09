@@ -46,33 +46,31 @@
 }
 - (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated
 {
-    self.navigationBar.tintColor = [UIColor blackColor];
+    HCTintColor = HCRandomColor;
+    self.navigationBar.tintColor = HCTintColor;
     [self.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
     self.tabBarController.tabBar.hidden = NO;
-    HCTintColor = HCMainColor;
     return [super popToRootViewControllerAnimated:animated];
 }
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
-    self.navigationBar.tintColor = [UIColor blackColor];
+    HCTintColor = HCRandomColor;
+    self.navigationBar.tintColor = HCTintColor;
     [self.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
     self.tabBarController.tabBar.hidden = NO;
-    HCTintColor = HCMainColor;
     return [super popViewControllerAnimated:animated];
 }
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [super pushViewController:viewController animated:animated];
+    HCTintColor = HCRandomColor;
+    viewController.navigationController.navigationBar.barTintColor = HCTintColor;
     if (self.viewControllers.count > 0) {
-//        [viewController.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-//        [viewController.navigationController.navigationBar setShadowImage:[UIImage new]];
         
-        HCTintColor = HCRandomColor;
-        viewController.navigationController.navigationBar.tintColor = HCTintColor;
         viewController.tabBarController.tabBar.hidden = YES;
-
+        viewController.hidesBottomBarWhenPushed = YES;
     }
+    [super pushViewController:viewController animated:animated];
 }
 @end

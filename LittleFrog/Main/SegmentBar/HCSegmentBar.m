@@ -10,7 +10,7 @@
 #import "UIView+HCExtension.h"
 
 
-#define kMinMargin 10
+#define kMinMargin 30
 
 @interface HCSegmentBar ()
 {
@@ -170,7 +170,7 @@
         [btn sizeToFit];
         // y 0
         // x, y,
-        btn.y = 0;
+        btn.centerY = self.height / 2;
         
         btn.x = lastX;
         

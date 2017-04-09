@@ -1,9 +1,9 @@
 //
 //  HCDownLoader.h
-//  HCDownLoadLib
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/26.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,22 +22,21 @@ typedef enum : NSUInteger {
     HCDownLoaderStateFailed
 } HCDownLoaderState;
 
-
 typedef void(^DownLoadInfoType)(long long fileSize);
+typedef void(^DownLoadProgressType)(float progress);
+typedef void(^DownLoadStateChangeType)(HCDownLoaderState state);
 typedef void(^DownLoadSuccessType)(NSString *cacheFilePath);
-typedef void(^DownLoadFailType)();
+typedef void(^DownLoadFailType)(NSString *msg);
 
 @interface HCDownLoader : NSObject
-
 // 如果当前已经下载, 继续下载, 如果没有下载, 从头开始下载
 - (void)downLoadWithURL: (NSURL *)url;
+
+- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
 
 + (NSString *)downLoadedFileWithURL: (NSURL *)url;
 + (long long)tmpCacheSizeWithURL: (NSURL *)url;
 + (void)clearCacheWithURL: (NSURL *)url;
-
-
-- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
 
 // 恢复下载
 - (void)resume;
@@ -58,13 +57,13 @@ typedef void(^DownLoadFailType)();
 @property (nonatomic, assign) float progress;
 
 // 下载进度
-@property (nonatomic, copy) void(^downLoadProgress)(float progress);
+@property (nonatomic, copy) DownLoadProgressType downLoadProgress;
 
 // 文件下载信息 (下载的大小)
 @property (nonatomic, copy) DownLoadInfoType downLoadInfo;
 
 // 状态的改变 ()
-@property (nonatomic, copy) void(^downLoadStateChange)(HCDownLoaderState state);
+@property (nonatomic, copy) DownLoadStateChangeType downLoadStateChange;
 
 // 下载成功 (成功路径)
 @property (nonatomic, copy) DownLoadSuccessType downLoadSuccess;

@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"排行榜";
     [self setupRefreshHeader];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }

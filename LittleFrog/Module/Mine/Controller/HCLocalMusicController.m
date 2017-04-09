@@ -32,11 +32,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.segmentBarVC.segmentBar.frame = CGRectMake(0, HCNavigationHeight, HCScreenWidth, AdaptedHeight(40));
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
+    self.segmentBarVC.segmentBar.frame = CGRectMake(0, HCNavigationHeight, HCScreenWidth, AdaptedHeight(50));
     [self.view addSubview:self.segmentBarVC.segmentBar];
     
-    self.segmentBarVC.view.frame = CGRectMake(0, HCNavigationHeight + AdaptedHeight(40), HCScreenWidth, HCScreenHeight - HCNavigationHeight - AdaptedHeight(40));
+    self.segmentBarVC.view.frame = CGRectMake(0, HCNavigationHeight + AdaptedHeight(50), HCScreenWidth, HCScreenHeight - HCNavigationHeight - AdaptedHeight(50));
     [self.view addSubview:self.segmentBarVC.view];
+    
+    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, HCNavigationHeight + AdaptedHeight(50), HCScreenWidth, 0.5)];
+    separateLine.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:separateLine];
+    
+    
+    
     
     HCMineSongController *vc1 = [[HCMineSongController alloc] init];
     HCMineAuthorController *vc2 = [[HCMineAuthorController alloc] init];
@@ -46,9 +55,6 @@
     [self.segmentBarVC.segmentBar updateWithConfig:^(HCSegmentBarConfig *config) {
         config.segmentBarBackColor = [UIColor whiteColor];
     }];
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

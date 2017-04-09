@@ -20,7 +20,7 @@
     if (!_segmentBar) {
         HCSegmentBar *segmentBar = [HCSegmentBar segmentBarWithFrame:CGRectZero];
         segmentBar.delegate = self;
-        segmentBar.backgroundColor = [UIColor brownColor];
+        segmentBar.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:segmentBar];
         _segmentBar = segmentBar;
         

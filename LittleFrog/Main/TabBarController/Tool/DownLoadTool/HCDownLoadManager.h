@@ -1,13 +1,14 @@
 //
 //  HCDownLoadManager.h
-//  HCDownLoadLib
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/27.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "HCDownLoader.h"
+
 
 @interface HCDownLoadManager : NSObject
 
@@ -22,7 +23,9 @@
 
 // 根据URL下载资源
 // 监听下载信息, 成功, 失败回调
-- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
+- (void)downLoadWithURL: (NSURL *)url progress:(DownLoadProgressType)progressBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
+
+- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
 
 // 根据URL暂停资源
 - (void)pauseWithURL: (NSURL *)url;

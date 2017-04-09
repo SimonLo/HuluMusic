@@ -32,6 +32,18 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic ,strong) NSMutableArray *songIdsArrayM;
 @end
 @implementation HCPublicTableView
+- (void)setCellTransparency:(BOOL)cellTransparency {
+    _cellTransparency = cellTransparency;
+    
+    //修复cell展开的时候，看到后面图片bug
+    if (!cellTransparency) {
+        UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, HCScreenWidth * 0.5 + 60, HCScreenWidth, 200)];
+        whiteView.backgroundColor = [UIColor whiteColor];
+        [self insertSubview:whiteView atIndex:0];
+    }
+    
+}
+
 - (void)setSongList:(NSMutableArray *)list songIds:(NSMutableArray *)ids
 {
     self.songListArrayM = list;

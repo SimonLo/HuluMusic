@@ -26,10 +26,14 @@
 		6115668E1E98F7BA000A7EEE /* HCSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566881E98F7BA000A7EEE /* HCSqliteModelTool.m */; };
 		6115668F1E98F7BA000A7EEE /* HCSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115668A1E98F7BA000A7EEE /* HCSqliteTool.m */; };
 		611566901E98F7BA000A7EEE /* HCTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115668C1E98F7BA000A7EEE /* HCTableTool.m */; };
-		6115669A1E98F983000A7EEE /* NSString+HCDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566931E98F983000A7EEE /* NSString+HCDownLoader.m */; };
-		6115669B1E98F983000A7EEE /* HCDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566951E98F983000A7EEE /* HCDownLoader.m */; };
-		6115669C1E98F983000A7EEE /* HCDownLoaderFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566971E98F983000A7EEE /* HCDownLoaderFileTool.m */; };
-		6115669D1E98F983000A7EEE /* HCDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566991E98F983000A7EEE /* HCDownLoadManager.m */; };
+		611566A61E9948A1000A7EEE /* HCSingleSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566A51E9948A1000A7EEE /* HCSingleSongCell.m */; };
+		611566A91E994A9E000A7EEE /* HCAuthorSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566A81E994A9E000A7EEE /* HCAuthorSongCell.m */; };
+		611566AC1E994AAE000A7EEE /* HCAlbumSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566AB1E994AAE000A7EEE /* HCAlbumSongCell.m */; };
+		611566B51E99FEBA000A7EEE /* NSString+HCMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566AE1E99FEBA000A7EEE /* NSString+HCMD5.m */; };
+		611566B61E99FEBA000A7EEE /* HCDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B01E99FEBA000A7EEE /* HCDownLoader.m */; };
+		611566B71E99FEBA000A7EEE /* HCDownLoaderFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B21E99FEBA000A7EEE /* HCDownLoaderFileTool.m */; };
+		611566B81E99FEBA000A7EEE /* HCDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B41E99FEBA000A7EEE /* HCDownLoadManager.m */; };
+		611566BB1E9A01EA000A7EEE /* HCMineDownloadListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */; };
 		6142657D1E90FDB600A3970B /* IPHONE8.png in Resources */ = {isa = PBXBuildFile; fileRef = 6142657C1E90FDB600A3970B /* IPHONE8.png */; };
 		6142659D1E92383900A3970B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659C1E92383900A3970B /* SystemConfiguration.framework */; };
 		6142659F1E92384800A3970B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659E1E92384800A3970B /* CoreTelephony.framework */; };
@@ -140,14 +144,22 @@
 		6115668A1E98F7BA000A7EEE /* HCSqliteTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSqliteTool.m; sourceTree = "<group>"; };
 		6115668B1E98F7BA000A7EEE /* HCTableTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCTableTool.h; sourceTree = "<group>"; };
 		6115668C1E98F7BA000A7EEE /* HCTableTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCTableTool.m; sourceTree = "<group>"; };
-		611566921E98F983000A7EEE /* NSString+HCDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HCDownLoader.h"; sourceTree = "<group>"; };
-		611566931E98F983000A7EEE /* NSString+HCDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HCDownLoader.m"; sourceTree = "<group>"; };
-		611566941E98F983000A7EEE /* HCDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoader.h; sourceTree = "<group>"; };
-		611566951E98F983000A7EEE /* HCDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoader.m; sourceTree = "<group>"; };
-		611566961E98F983000A7EEE /* HCDownLoaderFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoaderFileTool.h; sourceTree = "<group>"; };
-		611566971E98F983000A7EEE /* HCDownLoaderFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoaderFileTool.m; sourceTree = "<group>"; };
-		611566981E98F983000A7EEE /* HCDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoadManager.h; sourceTree = "<group>"; };
-		611566991E98F983000A7EEE /* HCDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoadManager.m; sourceTree = "<group>"; };
+		611566A41E9948A1000A7EEE /* HCSingleSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSingleSongCell.h; sourceTree = "<group>"; };
+		611566A51E9948A1000A7EEE /* HCSingleSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSingleSongCell.m; sourceTree = "<group>"; };
+		611566A71E994A9E000A7EEE /* HCAuthorSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCAuthorSongCell.h; sourceTree = "<group>"; };
+		611566A81E994A9E000A7EEE /* HCAuthorSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCAuthorSongCell.m; sourceTree = "<group>"; };
+		611566AA1E994AAE000A7EEE /* HCAlbumSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCAlbumSongCell.h; sourceTree = "<group>"; };
+		611566AB1E994AAE000A7EEE /* HCAlbumSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCAlbumSongCell.m; sourceTree = "<group>"; };
+		611566AD1E99FEBA000A7EEE /* NSString+HCMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HCMD5.h"; sourceTree = "<group>"; };
+		611566AE1E99FEBA000A7EEE /* NSString+HCMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HCMD5.m"; sourceTree = "<group>"; };
+		611566AF1E99FEBA000A7EEE /* HCDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoader.h; sourceTree = "<group>"; };
+		611566B01E99FEBA000A7EEE /* HCDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoader.m; sourceTree = "<group>"; };
+		611566B11E99FEBA000A7EEE /* HCDownLoaderFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoaderFileTool.h; sourceTree = "<group>"; };
+		611566B21E99FEBA000A7EEE /* HCDownLoaderFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoaderFileTool.m; sourceTree = "<group>"; };
+		611566B31E99FEBA000A7EEE /* HCDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoadManager.h; sourceTree = "<group>"; };
+		611566B41E99FEBA000A7EEE /* HCDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoadManager.m; sourceTree = "<group>"; };
+		611566B91E9A01EA000A7EEE /* HCMineDownloadListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCMineDownloadListController.h; sourceTree = "<group>"; };
+		611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCMineDownloadListController.m; sourceTree = "<group>"; };
 		6142657C1E90FDB600A3970B /* IPHONE8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPHONE8.png; sourceTree = "<group>"; };
 		6142659C1E92383900A3970B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6142659E1E92384800A3970B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -349,6 +361,8 @@
 				6115667C1E98EC50000A7EEE /* HCMineAuthorController.m */,
 				611566811E98EC74000A7EEE /* HCMineAlbumController.h */,
 				611566821E98EC74000A7EEE /* HCMineAlbumController.m */,
+				611566B91E9A01EA000A7EEE /* HCMineDownloadListController.h */,
+				611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,6 +377,9 @@
 		6115665E1E98AB8C000A7EEE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				611566A11E994879000A7EEE /* Album */,
+				611566A21E994879000A7EEE /* Author */,
+				611566A31E994879000A7EEE /* Song */,
 				611566651E98B293000A7EEE /* HCMusicSourceCell.h */,
 				611566661E98B293000A7EEE /* HCMusicSourceCell.m */,
 				611566621E98B261000A7EEE /* HCMineMusicCell.h */,
@@ -402,16 +419,43 @@
 		611566911E98F966000A7EEE /* DownLoadTool */ = {
 			isa = PBXGroup;
 			children = (
-				611566921E98F983000A7EEE /* NSString+HCDownLoader.h */,
-				611566931E98F983000A7EEE /* NSString+HCDownLoader.m */,
-				611566941E98F983000A7EEE /* HCDownLoader.h */,
-				611566951E98F983000A7EEE /* HCDownLoader.m */,
-				611566961E98F983000A7EEE /* HCDownLoaderFileTool.h */,
-				611566971E98F983000A7EEE /* HCDownLoaderFileTool.m */,
-				611566981E98F983000A7EEE /* HCDownLoadManager.h */,
-				611566991E98F983000A7EEE /* HCDownLoadManager.m */,
+				611566AD1E99FEBA000A7EEE /* NSString+HCMD5.h */,
+				611566AE1E99FEBA000A7EEE /* NSString+HCMD5.m */,
+				611566AF1E99FEBA000A7EEE /* HCDownLoader.h */,
+				611566B01E99FEBA000A7EEE /* HCDownLoader.m */,
+				611566B11E99FEBA000A7EEE /* HCDownLoaderFileTool.h */,
+				611566B21E99FEBA000A7EEE /* HCDownLoaderFileTool.m */,
+				611566B31E99FEBA000A7EEE /* HCDownLoadManager.h */,
+				611566B41E99FEBA000A7EEE /* HCDownLoadManager.m */,
 			);
 			path = DownLoadTool;
+			sourceTree = "<group>";
+		};
+		611566A11E994879000A7EEE /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				611566AA1E994AAE000A7EEE /* HCAlbumSongCell.h */,
+				611566AB1E994AAE000A7EEE /* HCAlbumSongCell.m */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		611566A21E994879000A7EEE /* Author */ = {
+			isa = PBXGroup;
+			children = (
+				611566A71E994A9E000A7EEE /* HCAuthorSongCell.h */,
+				611566A81E994A9E000A7EEE /* HCAuthorSongCell.m */,
+			);
+			path = Author;
+			sourceTree = "<group>";
+		};
+		611566A31E994879000A7EEE /* Song */ = {
+			isa = PBXGroup;
+			children = (
+				611566A41E9948A1000A7EEE /* HCSingleSongCell.h */,
+				611566A51E9948A1000A7EEE /* HCSingleSongCell.m */,
+			);
+			path = Song;
 			sourceTree = "<group>";
 		};
 		8A1A6B071CCB32BF008F6DE1 = {
@@ -1188,20 +1232,18 @@
 				611566901E98F7BA000A7EEE /* HCTableTool.m in Sources */,
 				8A211FB51CCD0E8D0069DE04 /* HCLrcTool.m in Sources */,
 				610575EF1E93B92F00F80654 /* JCTagListView.m in Sources */,
-				6115669B1E98F983000A7EEE /* HCDownLoader.m in Sources */,
 				611566831E98EC74000A7EEE /* HCMineAlbumController.m in Sources */,
-				6115669D1E98F983000A7EEE /* HCDownLoadManager.m in Sources */,
 				8A771DBE1CCB3C0C00F7A340 /* HCRankListController.m in Sources */,
 				8A1A6B5A1CCB3493008F6DE1 /* AppDelegate.m in Sources */,
 				6115668D1E98F7BA000A7EEE /* HCModelTool.m in Sources */,
 				8A771DE31CCB619100F7A340 /* HCCreatTool.m in Sources */,
 				611566721E98E9D9000A7EEE /* HCSegmentBar.m in Sources */,
-				6115669C1E98F983000A7EEE /* HCDownLoaderFileTool.m in Sources */,
 				8AEBF5991CD1C44800609606 /* HCSearchResultView.m in Sources */,
 				8A771DBB1CCB3BFB00F7A340 /* HCSearchController.m in Sources */,
 				611566741E98E9D9000A7EEE /* HCSementBarVC.m in Sources */,
 				8A771DB51CCB3BCA00F7A340 /* HCSongMenuController.m in Sources */,
 				8A771DD61CCB5BE800F7A340 /* HCPublicMusictablesModel.m in Sources */,
+				611566B81E99FEBA000A7EEE /* HCDownLoadManager.m in Sources */,
 				8A211FB11CCD0CB80069DE04 /* HCLrcView.m in Sources */,
 				8A771DCF1CCB58AE00F7A340 /* HCPublicCollectionCell.m in Sources */,
 				8A1A6B151CCB32BF008F6DE1 /* main.m in Sources */,
@@ -1217,6 +1259,7 @@
 				8A211FBD1CCD9E8F0069DE04 /* HCPlayMusicTool.m in Sources */,
 				8A211F9A1CCC682F0069DE04 /* HCSongListViewController.m in Sources */,
 				611566731E98E9D9000A7EEE /* HCSegmentBarConfig.m in Sources */,
+				611566B61E99FEBA000A7EEE /* HCDownLoader.m in Sources */,
 				8AEBF58F1CD1B5D400609606 /* HCSearchReferalView.m in Sources */,
 				611566801E98EC63000A7EEE /* HCMineSongController.m in Sources */,
 				8A211F931CCBB5C90069DE04 /* UIView+distribute.m in Sources */,
@@ -1226,14 +1269,17 @@
 				8A771DFB1CCB7BBA00F7A340 /* HCPublicSongDetailModel.m in Sources */,
 				6115667D1E98EC50000A7EEE /* HCMineAuthorController.m in Sources */,
 				8A93B4431CD0D27200C3CED3 /* HCRankBillboardModel.m in Sources */,
-				6115669A1E98F983000A7EEE /* NSString+HCDownLoader.m in Sources */,
+				611566A91E994A9E000A7EEE /* HCAuthorSongCell.m in Sources */,
 				6115668F1E98F7BA000A7EEE /* HCSqliteTool.m in Sources */,
+				611566B71E99FEBA000A7EEE /* HCDownLoaderFileTool.m in Sources */,
 				611566771E98EBA8000A7EEE /* HCLocalMusicController.m in Sources */,
 				611566641E98B261000A7EEE /* HCMineMusicCell.m in Sources */,
 				8A771DC11CCB43CF00F7A340 /* HCNavigationController.m in Sources */,
 				611566671E98B293000A7EEE /* HCMusicSourceCell.m in Sources */,
 				610575F91E95139100F80654 /* HCPlaySongListCell.m in Sources */,
+				611566A61E9948A1000A7EEE /* HCSingleSongCell.m in Sources */,
 				8A771DC81CCB447A00F7A340 /* HCMusicIndicator.m in Sources */,
+				611566BB1E9A01EA000A7EEE /* HCMineDownloadListController.m in Sources */,
 				8A771DF51CCB793800F7A340 /* HCPublicCellIconModel.m in Sources */,
 				8A211FAE1CCD0C030069DE04 /* HCLrcCell.m in Sources */,
 				8A211FC41CCE2D4F0069DE04 /* HCPlayerQueue.m in Sources */,
@@ -1249,10 +1295,12 @@
 				8AEBF5921CD1B84C00609606 /* HCSearchListModel.m in Sources */,
 				8A211FB81CCD1A140069DE04 /* HCMusicModel.m in Sources */,
 				8A1A6B211CCB32BF008F6DE1 /* LittleFrog.xcdatamodeld in Sources */,
+				611566B51E99FEBA000A7EEE /* NSString+HCMD5.m in Sources */,
 				8A771DDF1CCB615F00F7A340 /* HCNetWorkTool.m in Sources */,
 				8A771DF11CCB78DF00F7A340 /* HCPublicTableViewCell.m in Sources */,
 				8AEBF5B11CD249BF00609606 /* UIView+HCExtension.m in Sources */,
 				610575EE1E93B92F00F80654 /* JCTagCell.m in Sources */,
+				611566AC1E994AAE000A7EEE /* HCAlbumSongCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

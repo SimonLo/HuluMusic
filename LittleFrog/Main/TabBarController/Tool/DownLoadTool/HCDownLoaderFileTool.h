@@ -1,9 +1,9 @@
 //
 //  HCDownLoaderFileTool.h
-//  HCDownLoadLib
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/26.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

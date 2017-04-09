@@ -20,9 +20,9 @@
 #import "HCSongListContentView.h"
 
 typedef NS_ENUM(NSInteger){
-    CicyleMode = 0,
-    RandomMode,
-    singleModel
+    CycleMode = 0,
+    singleModel,
+    RandomMode
 }playMode;
 @interface HCPlayingViewController()<UIScrollViewDelegate>
 @property (nonatomic ,weak) UIImageView *backgroundImageView;
@@ -44,8 +44,8 @@ typedef NS_ENUM(NSInteger){
 @property (nonatomic ,weak) UIButton *playOrPauseButton;
 @property (nonatomic ,weak) UIButton *backMenuButton;
 @property (nonatomic ,weak) UIButton *shareButton;
-@property (nonatomic ,weak) UIButton *randomButton;
-@property (nonatomic ,weak) UIButton *singleCicyleButton;
+@property (nonatomic ,weak) UIButton *playModeButton;
+@property (nonatomic ,weak) UIButton *downloadButton;
 @property (nonatomic ,weak) UIButton *moreChoiceButton;
 
 //播放列表
@@ -180,13 +180,12 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     self.shareButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_export"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
     [self.shareButton addTarget:self action:@selector(clickShareButton) forControlEvents:UIControlEventTouchUpInside];
     
-    self.randomButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_shuffle copy"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
-    [self.randomButton setImage:[UIImage imageNamed:@"icon_ios_shuffle _ selected"] forState:UIControlStateSelected];
-    [self.randomButton addTarget:self action:@selector(clickRandomButton) forControlEvents:UIControlEventTouchUpInside];
+    self.playModeButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_replay0"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
+    [self.playModeButton addTarget:self action:@selector(playModeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.playModeButton.tag = CycleMode;
     
-    self.singleCicyleButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_replay"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
-    [self.singleCicyleButton setImage:[UIImage imageNamed:@"icon_ios_replay _ selected"] forState:UIControlStateSelected];
-    [self.singleCicyleButton addTarget:self action:@selector(clickSingleCicyleButton) forControlEvents:UIControlEventTouchUpInside];
+    self.downloadButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"cm2_lay_icn_dld"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
+    [self.downloadButton addTarget:self action:@selector(clickDownLoadButton) forControlEvents:UIControlEventTouchUpInside];
     
     self.moreChoiceButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_more_filled"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
     [self.moreChoiceButton addTarget:self action:@selector(clickMoreChoiceButton) forControlEvents:UIControlEventTouchUpInside];
@@ -242,7 +241,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     [self.buttonsView distributeViewsHorizontallyWith:@[self.currentTimeLabel,self.totalTimeLabel] margin:HCCommonSpacing];
     [self.buttonsView distributeViewsVerticallyWith:@[self.currentTimeLabel,self.likeButton,self.shareButton] margin:HCCommonSpacing];
     [self.buttonsView distributeViewsHorizontallyWith:@[self.likeButton,self.previousButton,self.playOrPauseButton,self.nextButton,self.backMenuButton] margin:HCHorizontalSpacing];
-    [self.buttonsView distributeViewsHorizontallyWith:@[self.shareButton,self.randomButton,self.singleCicyleButton,self.moreChoiceButton] margin:HCHorizontalSpacing];
+    [self.buttonsView distributeViewsHorizontallyWith:@[self.shareButton,self.playModeButton,self.downloadButton,self.moreChoiceButton] margin:HCHorizontalSpacing];
 
 }
 
@@ -389,22 +388,43 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
         
     }];
 }
-- (void)clickRandomButton
-{
-    HCLog(@"Random");
-    self.randomButton.selected = !self.randomButton.selected;
-    self.singleCicyleButton.selected = NO;
-    [HCPromptTool promptModeText:(self.randomButton.selected ? @"随机播放" : @"取消随机")afterDelay:1];
-    self.playMode = self.randomButton.selected ? RandomMode : CicyleMode;
+- (void)playModeButtonClick:(UIButton *)sender {
+    self.playModeButton.tag += 1;
+    int mode = self.playModeButton.tag % 3;
+    NSString *imgName = [NSString stringWithFormat:@"icon_ios_replay%zd",mode];
+    [self.playModeButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    switch (mode) {
+        case CycleMode:
+        {
+            [HCPromptTool promptModeText:@"顺序播放" afterDelay:1.0];
+            self.playMode = CycleMode;
+        }
+            break;
+        case singleModel:
+        {
+            [HCPromptTool promptModeText:@"单曲循环" afterDelay:1.0];
+            self.playMode = singleModel;
+        }
+            
+            break;
+        case RandomMode:
+        {
+            [HCPromptTool promptModeText:@"随机播放" afterDelay:1.0];
+            self.playMode = RandomMode;
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
 }
-- (void)clickSingleCicyleButton
+- (void)clickDownLoadButton
 {
-    HCLog(@"Cicyle");
-    self.singleCicyleButton.selected = !self.singleCicyleButton.selected;
-    self.randomButton.selected = NO;
-    [HCPromptTool promptModeText:(self.singleCicyleButton.selected ? @"单曲循环" : @"取消单曲循环")afterDelay:1];
-    self.playMode = self.singleCicyleButton.selected ? singleModel : CicyleMode;
+    HCLog(@"下载");
+    [HCPromptTool promptModeText:@"功能正在完善" afterDelay:1.0];
 }
+
 - (void)clickMoreChoiceButton
 {
     HCLog(@"MoreChoice");
@@ -472,7 +492,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 {
     [HCPlayMusicTool stopMusicWithLink:self.currentMusic.songLink];
     switch (self.playMode) {
-        case CicyleMode:
+        case CycleMode:
             [self cicyleMusic:variable];
             break;
         case RandomMode:

@@ -25,6 +25,7 @@
     [self UMengSetting];
     
     self.window = [[UIWindow alloc] initWithFrame:HCScreen];
+    self.window.backgroundColor = [UIColor whiteColor];
     HCTabbarController *tabBar = [[HCTabbarController alloc] init];
     self.window.rootViewController = tabBar;
     [self.window makeKeyAndVisible];

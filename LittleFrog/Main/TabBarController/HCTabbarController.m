@@ -25,7 +25,6 @@
     [self addChildViewController:search WithTitle:@"搜索" image:@"songSearch_normal" selectedImage:@"songSearch_highLighted"];
     HCMineViewController *mine = [[HCMineViewController alloc] init];
     [self addChildViewController:mine WithTitle:@"我的" image:@"songRank_normal" selectedImage:@"songRank_highLighted"];
-
 }
 
 - (void)addChildViewController:(UIViewController *)childVc WithTitle:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

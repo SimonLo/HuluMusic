@@ -1,16 +1,15 @@
 //
-//  NSString+HCDownLoader.m
-//  HCDownLoadLib
+//  NSString+HCMD5.m
+//  HCDownLoaderDemo
 //
-//  Created by SimonLo on 2016/11/26.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by Simon Lo on 2017/3/22.
+//  Copyright © 2017年 Simon Lo. All rights reserved.
 //
 
-#import "NSString+HCDownLoader.h"
+#import "NSString+HCMD5.h"
 #import <CommonCrypto/CommonDigest.h>
 
-
-@implementation NSString (HCDownLoader)
+@implementation NSString (HCMD5)
 
 - (NSString *)md5Str {
     
@@ -32,3 +31,5 @@
 
 
 @end
+
+
