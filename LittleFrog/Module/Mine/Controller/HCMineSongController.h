@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HCDownLoadBaseListController.h"
 
-@interface HCMineSongController : UIViewController
+@interface HCMineSongController : HCDownLoadBaseListController
 
 @end

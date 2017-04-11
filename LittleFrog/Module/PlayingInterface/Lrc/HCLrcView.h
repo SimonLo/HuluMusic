@@ -11,4 +11,5 @@
 @interface HCLrcView : UIScrollView
 @property (nonatomic ,assign) NSTimeInterval currentTime;
 @property (nonatomic ,strong) NSArray *lrcArray;
+
 @end

@@ -22,10 +22,6 @@
 		6115667D1E98EC50000A7EEE /* HCMineAuthorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115667C1E98EC50000A7EEE /* HCMineAuthorController.m */; };
 		611566801E98EC63000A7EEE /* HCMineSongController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115667F1E98EC63000A7EEE /* HCMineSongController.m */; };
 		611566831E98EC74000A7EEE /* HCMineAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566821E98EC74000A7EEE /* HCMineAlbumController.m */; };
-		6115668D1E98F7BA000A7EEE /* HCModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566861E98F7BA000A7EEE /* HCModelTool.m */; };
-		6115668E1E98F7BA000A7EEE /* HCSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566881E98F7BA000A7EEE /* HCSqliteModelTool.m */; };
-		6115668F1E98F7BA000A7EEE /* HCSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115668A1E98F7BA000A7EEE /* HCSqliteTool.m */; };
-		611566901E98F7BA000A7EEE /* HCTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6115668C1E98F7BA000A7EEE /* HCTableTool.m */; };
 		611566A61E9948A1000A7EEE /* HCSingleSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566A51E9948A1000A7EEE /* HCSingleSongCell.m */; };
 		611566A91E994A9E000A7EEE /* HCAuthorSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566A81E994A9E000A7EEE /* HCAuthorSongCell.m */; };
 		611566AC1E994AAE000A7EEE /* HCAlbumSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566AB1E994AAE000A7EEE /* HCAlbumSongCell.m */; };
@@ -33,13 +29,22 @@
 		611566B61E99FEBA000A7EEE /* HCDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B01E99FEBA000A7EEE /* HCDownLoader.m */; };
 		611566B71E99FEBA000A7EEE /* HCDownLoaderFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B21E99FEBA000A7EEE /* HCDownLoaderFileTool.m */; };
 		611566B81E99FEBA000A7EEE /* HCDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566B41E99FEBA000A7EEE /* HCDownLoadManager.m */; };
-		611566BB1E9A01EA000A7EEE /* HCMineDownloadListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */; };
+		611566C81E9A6BFE000A7EEE /* HCDownLoadBaseListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566C71E9A6BFE000A7EEE /* HCDownLoadBaseListController.m */; };
+		611566CB1E9A6DE4000A7EEE /* HCDownLoadListernDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566CA1E9A6DE4000A7EEE /* HCDownLoadListernDataTool.m */; };
+		611566D01E9A6F43000A7EEE /* HCModelOperationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566CD1E9A6F43000A7EEE /* HCModelOperationTool.m */; };
+		611566D11E9A6F43000A7EEE /* HCSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566CF1E9A6F43000A7EEE /* HCSqliteTool.m */; };
+		611566D81E9A72EA000A7EEE /* HCSingleSongCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 611566D71E9A72EA000A7EEE /* HCSingleSongCellVM.m */; };
 		6142657D1E90FDB600A3970B /* IPHONE8.png in Resources */ = {isa = PBXBuildFile; fileRef = 6142657C1E90FDB600A3970B /* IPHONE8.png */; };
 		6142659D1E92383900A3970B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659C1E92383900A3970B /* SystemConfiguration.framework */; };
 		6142659F1E92384800A3970B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6142659E1E92384800A3970B /* CoreTelephony.framework */; };
 		614265A11E92385B00A3970B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 614265A01E92385B00A3970B /* libsqlite3.tbd */; };
 		614265A31E92386900A3970B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 614265A21E92386900A3970B /* libc++.tbd */; };
 		614265A51E92387500A3970B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 614265A41E92387500A3970B /* libz.tbd */; };
+		6142E3B01E9D10270071E4DD /* GVUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 6142E3AF1E9D10270071E4DD /* GVUserDefaults.m */; };
+		6142E3B81E9D11080071E4DD /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6142E3B51E9D11080071E4DD /* FBShimmeringLayer.m */; };
+		6142E3B91E9D11080071E4DD /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6142E3B71E9D11080071E4DD /* FBShimmeringView.m */; };
+		6142E3BC1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6142E3BB1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.m */; };
+		6197FCD01E9ABAF0007DD7E7 /* HCPlayingCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6197FCCF1E9ABAF0007DD7E7 /* HCPlayingCustomView.m */; };
 		8A1A6B151CCB32BF008F6DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A6B141CCB32BF008F6DE1 /* main.m */; };
 		8A1A6B211CCB32BF008F6DE1 /* LittleFrog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A6B1F1CCB32BF008F6DE1 /* LittleFrog.xcdatamodeld */; };
 		8A1A6B231CCB32BF008F6DE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A1A6B221CCB32BF008F6DE1 /* Assets.xcassets */; };
@@ -136,14 +141,6 @@
 		6115667F1E98EC63000A7EEE /* HCMineSongController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCMineSongController.m; sourceTree = "<group>"; };
 		611566811E98EC74000A7EEE /* HCMineAlbumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCMineAlbumController.h; sourceTree = "<group>"; };
 		611566821E98EC74000A7EEE /* HCMineAlbumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCMineAlbumController.m; sourceTree = "<group>"; };
-		611566851E98F7BA000A7EEE /* HCModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCModelTool.h; sourceTree = "<group>"; };
-		611566861E98F7BA000A7EEE /* HCModelTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCModelTool.m; sourceTree = "<group>"; };
-		611566871E98F7BA000A7EEE /* HCSqliteModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSqliteModelTool.h; sourceTree = "<group>"; };
-		611566881E98F7BA000A7EEE /* HCSqliteModelTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSqliteModelTool.m; sourceTree = "<group>"; };
-		611566891E98F7BA000A7EEE /* HCSqliteTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSqliteTool.h; sourceTree = "<group>"; };
-		6115668A1E98F7BA000A7EEE /* HCSqliteTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSqliteTool.m; sourceTree = "<group>"; };
-		6115668B1E98F7BA000A7EEE /* HCTableTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCTableTool.h; sourceTree = "<group>"; };
-		6115668C1E98F7BA000A7EEE /* HCTableTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCTableTool.m; sourceTree = "<group>"; };
 		611566A41E9948A1000A7EEE /* HCSingleSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSingleSongCell.h; sourceTree = "<group>"; };
 		611566A51E9948A1000A7EEE /* HCSingleSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSingleSongCell.m; sourceTree = "<group>"; };
 		611566A71E994A9E000A7EEE /* HCAuthorSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCAuthorSongCell.h; sourceTree = "<group>"; };
@@ -158,14 +155,34 @@
 		611566B21E99FEBA000A7EEE /* HCDownLoaderFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoaderFileTool.m; sourceTree = "<group>"; };
 		611566B31E99FEBA000A7EEE /* HCDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoadManager.h; sourceTree = "<group>"; };
 		611566B41E99FEBA000A7EEE /* HCDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoadManager.m; sourceTree = "<group>"; };
-		611566B91E9A01EA000A7EEE /* HCMineDownloadListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCMineDownloadListController.h; sourceTree = "<group>"; };
-		611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCMineDownloadListController.m; sourceTree = "<group>"; };
+		611566C61E9A6BFE000A7EEE /* HCDownLoadBaseListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoadBaseListController.h; sourceTree = "<group>"; };
+		611566C71E9A6BFE000A7EEE /* HCDownLoadBaseListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoadBaseListController.m; sourceTree = "<group>"; };
+		611566C91E9A6DE4000A7EEE /* HCDownLoadListernDataTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCDownLoadListernDataTool.h; sourceTree = "<group>"; };
+		611566CA1E9A6DE4000A7EEE /* HCDownLoadListernDataTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCDownLoadListernDataTool.m; sourceTree = "<group>"; };
+		611566CC1E9A6F43000A7EEE /* HCModelOperationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCModelOperationTool.h; sourceTree = "<group>"; };
+		611566CD1E9A6F43000A7EEE /* HCModelOperationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCModelOperationTool.m; sourceTree = "<group>"; };
+		611566CE1E9A6F43000A7EEE /* HCSqliteTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSqliteTool.h; sourceTree = "<group>"; };
+		611566CF1E9A6F43000A7EEE /* HCSqliteTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSqliteTool.m; sourceTree = "<group>"; };
+		611566D61E9A72EA000A7EEE /* HCSingleSongCellVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSingleSongCellVM.h; sourceTree = "<group>"; };
+		611566D71E9A72EA000A7EEE /* HCSingleSongCellVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSingleSongCellVM.m; sourceTree = "<group>"; };
 		6142657C1E90FDB600A3970B /* IPHONE8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPHONE8.png; sourceTree = "<group>"; };
 		6142659C1E92383900A3970B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6142659E1E92384800A3970B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		614265A01E92385B00A3970B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		614265A21E92386900A3970B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		614265A41E92387500A3970B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		6142E3AE1E9D10270071E4DD /* GVUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVUserDefaults.h; sourceTree = "<group>"; };
+		6142E3AF1E9D10270071E4DD /* GVUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVUserDefaults.m; sourceTree = "<group>"; };
+		6142E3B21E9D11080071E4DD /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
+		6142E3B31E9D11080071E4DD /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		6142E3B41E9D11080071E4DD /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		6142E3B51E9D11080071E4DD /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		6142E3B61E9D11080071E4DD /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		6142E3B71E9D11080071E4DD /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		6142E3BA1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+HCProperties.h"; sourceTree = "<group>"; };
+		6142E3BB1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+HCProperties.m"; sourceTree = "<group>"; };
+		6197FCCE1E9ABAF0007DD7E7 /* HCPlayingCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCPlayingCustomView.h; sourceTree = "<group>"; };
+		6197FCCF1E9ABAF0007DD7E7 /* HCPlayingCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCPlayingCustomView.m; sourceTree = "<group>"; };
 		8A1A6B101CCB32BF008F6DE1 /* LittleFrog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleFrog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A1A6B141CCB32BF008F6DE1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8A1A6B201CCB32BF008F6DE1 /* LittleFrog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LittleFrog.xcdatamodel; sourceTree = "<group>"; };
@@ -309,6 +326,8 @@
 		610575C51E93B86700F80654 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				6142E3B11E9D11080071E4DD /* FBShimmering */,
+				6142E3AD1E9D10270071E4DD /* GVUserDefaults */,
 				610575CE1E93B88900F80654 /* JCTagListView */,
 			);
 			path = ThirdParty;
@@ -334,6 +353,8 @@
 				610575F51E93F44D00F80654 /* HCSongListContentView.m */,
 				610575F71E95139100F80654 /* HCPlaySongListCell.h */,
 				610575F81E95139100F80654 /* HCPlaySongListCell.m */,
+				6197FCCE1E9ABAF0007DD7E7 /* HCPlayingCustomView.h */,
+				6197FCCF1E9ABAF0007DD7E7 /* HCPlayingCustomView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -344,6 +365,7 @@
 				6115665C1E98AB8C000A7EEE /* Controller */,
 				6115665D1E98AB8C000A7EEE /* Model */,
 				6115665E1E98AB8C000A7EEE /* View */,
+				611566D21E9A70E2000A7EEE /* ViewModel */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -355,14 +377,16 @@
 				611566601E98ABC1000A7EEE /* HCMineViewController.m */,
 				611566751E98EBA8000A7EEE /* HCLocalMusicController.h */,
 				611566761E98EBA8000A7EEE /* HCLocalMusicController.m */,
+				611566C91E9A6DE4000A7EEE /* HCDownLoadListernDataTool.h */,
+				611566CA1E9A6DE4000A7EEE /* HCDownLoadListernDataTool.m */,
+				611566C61E9A6BFE000A7EEE /* HCDownLoadBaseListController.h */,
+				611566C71E9A6BFE000A7EEE /* HCDownLoadBaseListController.m */,
 				6115667E1E98EC63000A7EEE /* HCMineSongController.h */,
 				6115667F1E98EC63000A7EEE /* HCMineSongController.m */,
 				6115667B1E98EC50000A7EEE /* HCMineAuthorController.h */,
 				6115667C1E98EC50000A7EEE /* HCMineAuthorController.m */,
 				611566811E98EC74000A7EEE /* HCMineAlbumController.h */,
 				611566821E98EC74000A7EEE /* HCMineAlbumController.m */,
-				611566B91E9A01EA000A7EEE /* HCMineDownloadListController.h */,
-				611566BA1E9A01EA000A7EEE /* HCMineDownloadListController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -404,14 +428,10 @@
 		611566841E98F7AC000A7EEE /* SqliteTool */ = {
 			isa = PBXGroup;
 			children = (
-				611566851E98F7BA000A7EEE /* HCModelTool.h */,
-				611566861E98F7BA000A7EEE /* HCModelTool.m */,
-				611566871E98F7BA000A7EEE /* HCSqliteModelTool.h */,
-				611566881E98F7BA000A7EEE /* HCSqliteModelTool.m */,
-				611566891E98F7BA000A7EEE /* HCSqliteTool.h */,
-				6115668A1E98F7BA000A7EEE /* HCSqliteTool.m */,
-				6115668B1E98F7BA000A7EEE /* HCTableTool.h */,
-				6115668C1E98F7BA000A7EEE /* HCTableTool.m */,
+				611566CC1E9A6F43000A7EEE /* HCModelOperationTool.h */,
+				611566CD1E9A6F43000A7EEE /* HCModelOperationTool.m */,
+				611566CE1E9A6F43000A7EEE /* HCSqliteTool.h */,
+				611566CF1E9A6F43000A7EEE /* HCSqliteTool.m */,
 			);
 			path = SqliteTool;
 			sourceTree = "<group>";
@@ -456,6 +476,37 @@
 				611566A51E9948A1000A7EEE /* HCSingleSongCell.m */,
 			);
 			path = Song;
+			sourceTree = "<group>";
+		};
+		611566D21E9A70E2000A7EEE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				611566D61E9A72EA000A7EEE /* HCSingleSongCellVM.h */,
+				611566D71E9A72EA000A7EEE /* HCSingleSongCellVM.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6142E3AD1E9D10270071E4DD /* GVUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				6142E3AE1E9D10270071E4DD /* GVUserDefaults.h */,
+				6142E3AF1E9D10270071E4DD /* GVUserDefaults.m */,
+			);
+			path = GVUserDefaults;
+			sourceTree = "<group>";
+		};
+		6142E3B11E9D11080071E4DD /* FBShimmering */ = {
+			isa = PBXGroup;
+			children = (
+				6142E3B21E9D11080071E4DD /* FBShimmering-Prefix.pch */,
+				6142E3B31E9D11080071E4DD /* FBShimmering.h */,
+				6142E3B41E9D11080071E4DD /* FBShimmeringLayer.h */,
+				6142E3B51E9D11080071E4DD /* FBShimmeringLayer.m */,
+				6142E3B61E9D11080071E4DD /* FBShimmeringView.h */,
+				6142E3B71E9D11080071E4DD /* FBShimmeringView.m */,
+			);
+			path = FBShimmering;
 			sourceTree = "<group>";
 		};
 		8A1A6B071CCB32BF008F6DE1 = {
@@ -1054,6 +1105,8 @@
 			children = (
 				8AEBF5AF1CD249BF00609606 /* UIView+HCExtension.h */,
 				8AEBF5B01CD249BF00609606 /* UIView+HCExtension.m */,
+				6142E3BA1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.h */,
+				6142E3BB1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.m */,
 			);
 			name = Categary;
 			path = TabBarController/Tool;
@@ -1228,14 +1281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				611566D11E9A6F43000A7EEE /* HCSqliteTool.m in Sources */,
 				8AEBF5951CD1B87100609606 /* HCSearchInfoModel.m in Sources */,
-				611566901E98F7BA000A7EEE /* HCTableTool.m in Sources */,
 				8A211FB51CCD0E8D0069DE04 /* HCLrcTool.m in Sources */,
 				610575EF1E93B92F00F80654 /* JCTagListView.m in Sources */,
 				611566831E98EC74000A7EEE /* HCMineAlbumController.m in Sources */,
 				8A771DBE1CCB3C0C00F7A340 /* HCRankListController.m in Sources */,
+				6142E3B81E9D11080071E4DD /* FBShimmeringLayer.m in Sources */,
 				8A1A6B5A1CCB3493008F6DE1 /* AppDelegate.m in Sources */,
-				6115668D1E98F7BA000A7EEE /* HCModelTool.m in Sources */,
 				8A771DE31CCB619100F7A340 /* HCCreatTool.m in Sources */,
 				611566721E98E9D9000A7EEE /* HCSegmentBar.m in Sources */,
 				8AEBF5991CD1C44800609606 /* HCSearchResultView.m in Sources */,
@@ -1261,17 +1314,19 @@
 				611566731E98E9D9000A7EEE /* HCSegmentBarConfig.m in Sources */,
 				611566B61E99FEBA000A7EEE /* HCDownLoader.m in Sources */,
 				8AEBF58F1CD1B5D400609606 /* HCSearchReferalView.m in Sources */,
+				6142E3B01E9D10270071E4DD /* GVUserDefaults.m in Sources */,
 				611566801E98EC63000A7EEE /* HCMineSongController.m in Sources */,
 				8A211F931CCBB5C90069DE04 /* UIView+distribute.m in Sources */,
 				8A771DEC1CCB75FD00F7A340 /* HCPublicSonglistModel.m in Sources */,
 				8A211FCD1CCF48B50069DE04 /* HCRankListCell.m in Sources */,
+				611566CB1E9A6DE4000A7EEE /* HCDownLoadListernDataTool.m in Sources */,
 				8A211FA31CCD0A6D0069DE04 /* HCPlayingViewController.m in Sources */,
 				8A771DFB1CCB7BBA00F7A340 /* HCPublicSongDetailModel.m in Sources */,
 				6115667D1E98EC50000A7EEE /* HCMineAuthorController.m in Sources */,
 				8A93B4431CD0D27200C3CED3 /* HCRankBillboardModel.m in Sources */,
 				611566A91E994A9E000A7EEE /* HCAuthorSongCell.m in Sources */,
-				6115668F1E98F7BA000A7EEE /* HCSqliteTool.m in Sources */,
 				611566B71E99FEBA000A7EEE /* HCDownLoaderFileTool.m in Sources */,
+				6142E3B91E9D11080071E4DD /* FBShimmeringView.m in Sources */,
 				611566771E98EBA8000A7EEE /* HCLocalMusicController.m in Sources */,
 				611566641E98B261000A7EEE /* HCMineMusicCell.m in Sources */,
 				8A771DC11CCB43CF00F7A340 /* HCNavigationController.m in Sources */,
@@ -1279,7 +1334,6 @@
 				610575F91E95139100F80654 /* HCPlaySongListCell.m in Sources */,
 				611566A61E9948A1000A7EEE /* HCSingleSongCell.m in Sources */,
 				8A771DC81CCB447A00F7A340 /* HCMusicIndicator.m in Sources */,
-				611566BB1E9A01EA000A7EEE /* HCMineDownloadListController.m in Sources */,
 				8A771DF51CCB793800F7A340 /* HCPublicCellIconModel.m in Sources */,
 				8A211FAE1CCD0C030069DE04 /* HCLrcCell.m in Sources */,
 				8A211FC41CCE2D4F0069DE04 /* HCPlayerQueue.m in Sources */,
@@ -1287,11 +1341,14 @@
 				8A771DB21CCB3B7500F7A340 /* HCTabbarController.m in Sources */,
 				8A771DB81CCB3BE600F7A340 /* HCNewSongController.m in Sources */,
 				611566611E98ABC1000A7EEE /* HCMineViewController.m in Sources */,
+				611566D81E9A72EA000A7EEE /* HCSingleSongCellVM.m in Sources */,
+				6142E3BC1E9D1DC30071E4DD /* GVUserDefaults+HCProperties.m in Sources */,
+				611566C81E9A6BFE000A7EEE /* HCDownLoadBaseListController.m in Sources */,
 				8ADD7E9C1CD0ABA000999056 /* HCPublicTableView.m in Sources */,
 				8A771DFF1CCB7E1E00F7A340 /* HCPublicCellMenuItemButton.m in Sources */,
+				6197FCD01E9ABAF0007DD7E7 /* HCPlayingCustomView.m in Sources */,
 				8A211FAB1CCD0BC70069DE04 /* HCLrcLabel.m in Sources */,
 				8A211F9E1CCC69550069DE04 /* HCBlurViewTool.m in Sources */,
-				6115668E1E98F7BA000A7EEE /* HCSqliteModelTool.m in Sources */,
 				8AEBF5921CD1B84C00609606 /* HCSearchListModel.m in Sources */,
 				8A211FB81CCD1A140069DE04 /* HCMusicModel.m in Sources */,
 				8A1A6B211CCB32BF008F6DE1 /* LittleFrog.xcdatamodeld in Sources */,
@@ -1300,6 +1357,7 @@
 				8A771DF11CCB78DF00F7A340 /* HCPublicTableViewCell.m in Sources */,
 				8AEBF5B11CD249BF00609606 /* UIView+HCExtension.m in Sources */,
 				610575EE1E93B92F00F80654 /* JCTagCell.m in Sources */,
+				611566D01E9A6F43000A7EEE /* HCModelOperationTool.m in Sources */,
 				611566AC1E994AAE000A7EEE /* HCAlbumSongCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

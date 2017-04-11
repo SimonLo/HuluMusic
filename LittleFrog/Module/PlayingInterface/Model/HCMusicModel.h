@@ -17,6 +17,10 @@
 @property (nonatomic ,copy) NSString *songPicRadio;
 @property (nonatomic ,copy) NSString *songLink;
 @property (nonatomic ,copy) NSString *lrcLink;
+
+@property (nonatomic ,assign) BOOL isDownLoaded;
+
+
 //更高品质
 @property (nonatomic ,copy) NSString *showLink;
 @property (nonatomic ,copy) NSString *songId;

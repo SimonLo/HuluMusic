@@ -17,6 +17,7 @@
 @implementation HCLrcView
 
 #pragma mark - viewLoadAndLayout
+
 - (instancetype)init
 {
     if (self = [super init]) {

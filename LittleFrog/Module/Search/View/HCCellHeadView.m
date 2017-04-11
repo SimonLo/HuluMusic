@@ -41,7 +41,7 @@
         self.clickButton = [HCCreatTool buttonWithView:self];
         self.clickButton.frame = CGRectMake(HCScreenWidth - 74, 5, 54, 20);
         self.clickButton.titleLabel.font = HCBigFont;
-        self.clickButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        self.clickButton.layer.borderColor = [HColor(200,200,200) CGColor];
         self.clickButton.layer.borderWidth = 0.5;
         self.clickButton.layer.cornerRadius = 5.0;
         [self.clickButton setTitleColor:HCMainColor forState:UIControlStateNormal];

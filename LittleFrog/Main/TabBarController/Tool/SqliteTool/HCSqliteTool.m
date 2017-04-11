@@ -1,227 +1,183 @@
 //
 //  HCSqliteTool.m
-//  sqlite的基本封装
+//  HCSQLite
 //
-//  Created by SimonLo on 2016/12/3.
-//  Copyright © 2016年 SimonLo. All rights reserved.
+//  Created by 王顺子 on 16/11/23.
+//  Copyright © 2016年 王顺子. All rights reserved.
 //
 
 #import "HCSqliteTool.h"
 #import "sqlite3.h"
 
-#define kCache NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+#define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-//#define kCache @"/Users/wangshunzi/Desktop/"
+@interface HCSqliteTool ()
+{
+    sqlite3 *openDB;
+}
+@property (nonatomic, copy) NSString *dbPath;
+
+- (void)openDataBaseWithUserID: (NSString *)userID;
+- (void)closeDataBase;
+
+@end
 
 @implementation HCSqliteTool
 
-static sqlite3 *_ppDb;
-
-+ (BOOL)dealSql: (NSString *)sql withUID: (NSString *)uid {
-
-    [self openDBWithUID:uid];
-    
-    // 2. 执行sql
-    BOOL result = sqlite3_exec(_ppDb, sql.UTF8String, nil, nil, nil) == SQLITE_OK;
-    
-    [self closeDBWithUID:uid];
-    
-    
-    return result;
-    
-}
-
-+ (BOOL)dealSqls: (NSArray <NSString *>*)sqls withUID: (NSString *)uid {
-    
-    [self openDBWithUID:uid];
-    
-    [self beginTransaction];
-    
-    for (NSString *sql in sqls) {
-        BOOL result = sqlite3_exec(_ppDb, sql.UTF8String, nil, nil, nil) == SQLITE_OK;
-        if (!result) {
-            [self rollBackTransaction];
-            return NO;
-        }
+static HCSqliteTool *_shareInstance;
++ (instancetype)shareInstance {
+    if (_shareInstance == nil) {
+        _shareInstance = [[self alloc] init];
     }
-    
-    [self commitTransaction];
-    [self closeDBWithUID:uid];
-    
-    return YES;
-    
-}
-
-+ (void)beginTransaction {
-    
-    sqlite3_exec(_ppDb, "begin transaction", nil, nil, nil);
-    
-    
-    
-    
-}
-
-+ (void)commitTransaction {
-    sqlite3_exec(_ppDb, "commit transaction", nil, nil, nil);
-}
-
-+ (void)rollBackTransaction {
-    sqlite3_exec(_ppDb, "rollback transaction", nil, nil, nil);
+    return _shareInstance;
 }
 
 
+- (void)openDataBaseWithUserID: (NSString *)userID {
+    NSString *dbName = @"common.db";
+    if (userID.length > 0) {
+        dbName = [userID stringByAppendingString:@".db"];
+    }
+
+    NSString *dbFullPath = [kCachePath stringByAppendingPathComponent:dbName];
+
+    if (sqlite3_open([dbFullPath UTF8String], &openDB) == SQLITE_OK) {
+        NSLog(@"数据库打开成功");
+    }else {
+        NSLog(@"数据库打开失败");
+    }
+
+}
+- (void)closeDataBase {
+    sqlite3_close(openDB);
+}
 
 
-+ (NSArray <NSDictionary *>*)querySql: (NSString *)sql withUID: (NSString *)uid {
-    
-    [self openDBWithUID:uid];
-    
+- (BOOL)dealSQL: (NSString *)sql withUserID: (NSString *)userID {
 
-    // "select * from t_stu";
-    
-    // 准备语句
-    
-    // 1. 创建一个准备语句
+    [self openDataBaseWithUserID:userID];
+
+    char *errorMsg = nil;
+    if (sqlite3_exec(openDB, [sql UTF8String], nil, nil, &errorMsg) == SQLITE_OK) {
+        [self closeDataBase];
+        return YES;
+    }
+
+    [self closeDataBase];
+
+    return NO;
+}
+
+- (NSMutableArray *)querySQL: (NSString *)sql withUserID: (NSString *)userID {
+
+    [self openDataBaseWithUserID:userID];
+
     sqlite3_stmt *ppStmt;
-    if (sqlite3_prepare(_ppDb, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
-        
+    // 1. 预处理准备语句
+    if (sqlite3_prepare_v2(openDB, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
         NSLog(@"预处理失败");
-        sqlite3_finalize(ppStmt);
-        [self closeDBWithUID:uid];
         return nil;
-        
     }
-    
+
     NSMutableArray *rowDicArray = [NSMutableArray array];
-    
-    
-    // 2. 执行
-    // 如果下一行有记录, 就会返回 SQLITE_ROW, 会自动移动指针, 到下一行
+    // 2. 执行准备语句
     while (sqlite3_step(ppStmt) == SQLITE_ROW) {
-        // 一条记录 , 都会执行这个循环
-        // 解析一条记录 (列,  每一列的列名, 每一列的值)
-        
-        // 1. 获取, 列的个数
-        int columnCount = sqlite3_column_count(ppStmt);
-        
-        
+
         NSMutableDictionary *rowDic = [NSMutableDictionary dictionary];
-        [rowDicArray addObject:rowDic];
-        // 2. 遍历列 (列名, 值)
-        for (int i = 0; i < columnCount; i++) {
-            // 这一行的每一列
-            // 列名
-           NSString *columnName = [NSString stringWithUTF8String:sqlite3_column_name(ppStmt, i)];
-            
-            
-            
-            // 列的值
-            // 不同的列, 如果类型不同, 我们需要使用不同的函数, 获取响应的值
-            // 1. 获取这一列对应的类型
+
+
+        // 遍历这一行的每一列的信息
+        // 计算列数
+        int columnCount = sqlite3_column_count(ppStmt);
+        for (int i = 0; i < columnCount; i ++) {
+            // 获取列名称
+            const char *columnNameC = sqlite3_column_name(ppStmt, i);
+            NSString *columnName = [NSString stringWithUTF8String:columnNameC];
+
+            // 获取列的值
+            // 1. 获取每一列对应的类型
             int type = sqlite3_column_type(ppStmt, i);
-            
-            // 2. 根据不同的类型, 使用不同的函数,获取相应的值
-            
-//#define SQLITE_INTEGER  1
-//#define SQLITE_FLOAT    2
-//#define SQLITE_BLOB     4
-//#define SQLITE_NULL     5
-//#define SQLITE3_TEXT     3
-            
-            
-            id value;
-            
+
+            // 2. 根据不同的类型, 使用不同的函数获取不同的值
+            id value = nil;
             switch (type) {
                 case SQLITE_INTEGER:
-                {
-//                    NSLog(@"整形");
                     value = @(sqlite3_column_int(ppStmt, i));
                     break;
-                }
                 case SQLITE_FLOAT:
-                {
-//                    NSLog(@"浮点");
                     value = @(sqlite3_column_double(ppStmt, i));
                     break;
-                }
                 case SQLITE_BLOB:
-                {
-//                    NSLog(@"二进制");
-                    value = CFBridgingRelease(sqlite3_column_blob(ppStmt, i));
+                    value = (__bridge id)(sqlite3_column_blob(ppStmt, i));
                     break;
-                }
                 case SQLITE_NULL:
-                {
-//                    NSLog(@"空");
-                    value = @"";
+                    value = NULL;
                     break;
-                }
-                case SQLITE3_TEXT:
+                case SQLITE_TEXT:
                 {
-//                    NSLog(@"文本");
                     const char *valueC = (const char *)sqlite3_column_text(ppStmt, i);
-                    
                     value = [NSString stringWithUTF8String:valueC];
-                    
                     break;
                 }
-                    
                 default:
+                {
+                    const char *valueC = (const char *)sqlite3_column_text(ppStmt, i);
+                    value = [NSString stringWithUTF8String:valueC];
                     break;
+                }
             }
-            
-            
-//            NSLog(@"%@---%@", columnName, value);
-   
+
             [rowDic setValue:value forKey:columnName];
-            
+
         }
-        
-   
-        
+
+        [rowDicArray addObject:rowDic];
+
     }
-    
-    
-    
-    // 3. 释放
-    sqlite3_finalize(ppStmt);
-    [self closeDBWithUID:uid];
-    
-    
+    [self closeDataBase];
     
     return rowDicArray;
+
+
 }
 
+- (NSMutableArray <NSString *>*)getAllColumnNamesWithTableName: (NSString *)tableName userID: (NSString *)userID {
+    [self openDataBaseWithUserID:userID];
 
-
-+ (BOOL)openDBWithUID: (NSString *)uid {
-    // 确定哪个数据库
-    // cache
-    NSString *dbPath;
-    if (uid.length == 0) {
-        dbPath = [kCache stringByAppendingPathComponent:@"common.db"];
-    }else {
-        dbPath = [kCache stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", uid]];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ limit 1", tableName];
+    sqlite3_stmt *ppStmt;
+    // 1. 预处理准备语句
+    if (sqlite3_prepare_v2(openDB, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
+        NSLog(@"预处理失败");
+        return nil;
     }
-    
-    // 1. 打开数据库(如果数据库不存在, 创建)
-    
-    if (sqlite3_open(dbPath.UTF8String, &_ppDb) != SQLITE_OK) {
-        NSLog(@"打开数据库失败");
-        return NO;
+
+    NSMutableArray *rowDicArray = [NSMutableArray array];
+    // 2. 执行准备语句
+    if(sqlite3_step(ppStmt) == SQLITE_ROW) {
+
+        NSMutableArray *columnNames = [NSMutableArray array];
+
+
+        // 遍历这一行的每一列的信息
+        // 计算列数
+        int columnCount = sqlite3_column_count(ppStmt);
+        for (int i = 0; i < columnCount; i ++) {
+            // 获取列名称
+            const char *columnNameC = sqlite3_column_name(ppStmt, i);
+            NSString *columnName = [NSString stringWithUTF8String:columnNameC];
+            [columnNames addObject:columnName];
+        }
+        
     }
-    return YES;
+    [self closeDataBase];
     
+    return rowDicArray;
+    
+
+
+
 }
-
-+ (void)closeDBWithUID: (NSString *)uid {
-    
-    // 3. 关闭数据库
-    sqlite3_close(_ppDb);
-    
-}
-
-
 
 
 @end

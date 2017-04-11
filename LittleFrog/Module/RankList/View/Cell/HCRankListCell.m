@@ -32,6 +32,7 @@
             UILabel *label = [HCCreatTool labelWithView:self.contentView];
             label.frame = CGRectMake(imageHeight + 3 * HCVerticalSpacing, HCVerticalSpacing * 2 + (HCVerticalSpacing + labelHeight) * i, labelWidth, labelHeight);
             label.text = [NSString stringWithFormat:@"%ld. %@ - %@",(long)i + 1,song.title,song.author];
+            label.textColor = HCTextColor;
             label.font = HCBigFont;
             i++;
         }

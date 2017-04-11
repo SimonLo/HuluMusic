@@ -50,14 +50,14 @@
 
 - (void)setupTopImageView {
     self.topImageView = [HCCreatTool imageViewWithView:self.view];
-    self.topImageView.frame = CGRectMake(0, HCNavigationHeight, HCScreenWidth, HCScreenHeight * 0.5);
+    self.topImageView.frame = CGRectMake(0, HCNavigationHeight, HCScreenWidth, HCScreenHeight * 0.6);
     [self.view addSubview:self.topImageView];
 }
 
 - (void)setUpTableView
 {
     self.headView = [[HCPublicHeadView alloc] initWithFullHead:headerFullStyle];
-    self.headView.frame = CGRectMake(0, 0, HCScreenWidth, HCScreenWidth * 0.5 + 60);
+    self.headView.frame = CGRectMake(0, 0, HCScreenWidth, HCScreenWidth * 0.6 + 60);
     
      HCPublicTableView *publicTable = [[HCPublicTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     publicTable.cellTransparency = !headerFullStyle;
@@ -69,8 +69,8 @@
         if (offsetY > -HCNavigationHeight) {
             self.topImageView.y = -offsetY;
         } else {
-            if (offsetY < -210) {
-                self.topImageView.y = -(offsetY + 210 - HCNavigationHeight);
+            if (offsetY < -220) {
+                self.topImageView.y = -(offsetY + 220 - HCNavigationHeight);
             } else {
                 self.topImageView.y = HCNavigationHeight;
             }

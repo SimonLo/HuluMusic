@@ -10,6 +10,12 @@
 
 @implementation HCSingleSongCell
 
+static NSString *const cellID = @"downLoadMusic";
++ (instancetype)cellWithTableView:(UITableView *)tableView {
+    HCSingleSongCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    return cell;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

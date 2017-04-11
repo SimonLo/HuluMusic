@@ -83,7 +83,6 @@
     self.cacheFilePath = [kCache stringByAppendingPathComponent:url.lastPathComponent];
     self.tmpFilePath = [kTmp stringByAppendingPathComponent:[url.absoluteString md5Str]];
     
-    
     // 1 首先, 判断, 本地有没有已经下载好, 已经下载完毕, 就直接返回
     // 文件的位置, 文件的大小
     if ([HCDownLoaderFileTool isFileExists:self.cacheFilePath]) {

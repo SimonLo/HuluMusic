@@ -31,6 +31,10 @@
 {
     //添加导航控制器
     HCNavigationController *navigation = [[HCNavigationController alloc] initWithRootViewController:childVc];
+    [navigation.navigationBar setTitleTextAttributes:
+  @{NSFontAttributeName:[UIFont boldSystemFontOfSize:19],
+    NSForegroundColorAttributeName:HCTextColor}];
+    
     childVc.title = title;
     childVc.tabBarItem.image = [UIImage imageNamed:image];
     //将图片原始的样子显示出来，不自动渲染为其它颜色

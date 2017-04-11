@@ -13,4 +13,8 @@
 {
     return @[@"songName",@"artistName",@"albumName",@"songPicSmall",@"songPicBig",@"songPicRadio",@"songLink",@"lrcLink",@"showLink",@"songId"];
 }
+
+- (NSString *)primaryKey {
+    return @"trackId";
+}
 @end

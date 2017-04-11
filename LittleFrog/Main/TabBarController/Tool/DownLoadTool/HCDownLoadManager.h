@@ -25,6 +25,8 @@
 // 监听下载信息, 成功, 失败回调
 - (void)downLoadWithURL: (NSURL *)url progress:(DownLoadProgressType)progressBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
 
+- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
+
 - (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock;
 
 // 根据URL暂停资源

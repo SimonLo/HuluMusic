@@ -7,6 +7,7 @@
 //
 
 #import "HCPlayingViewController.h"
+#import "HCPlayingCustomView.h"
 #import "HCMusicModel.h"
 #import "HCLrcView.h"
 #import "HCPlayMusicTool.h"
@@ -16,6 +17,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "HCPublicSongDetailModel.h"
 #import <UShareUI/UShareUI.h>
+#import "FBShimmeringView.h"
+#import "GVUserDefaults+HCProperties.h"
+
+#import "HCDownLoadManager.h"
+#import "HCModelOperationTool.h"
 
 #import "HCSongListContentView.h"
 
@@ -35,6 +41,10 @@ typedef NS_ENUM(NSInteger){
 @property (nonatomic ,weak) UIView *buttonsView;
 @property (nonatomic ,weak) UILabel *currentTimeLabel;
 @property (nonatomic ,weak) UILabel *totalTimeLabel;
+
+@property (nonatomic ,weak) UILabel *tipsLable;
+@property (nonatomic ,weak) FBShimmeringView *shimmeringView;
+
 
 @property (nonatomic ,weak) UILabel *songNameLabel;
 @property (nonatomic ,weak) UILabel *authorNameLabel;
@@ -74,6 +84,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _playingVC = [[HCPlayingViewController alloc] init];
+        _playingVC.modalPresentationStyle = UIModalPresentationCustom;
     });
     return _playingVC;
 }
@@ -91,6 +102,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
         [self setUpLrcView];
         [self setUpSlider];
         [self setUpLabelInButtonsView];
+        [self setUPShimmerView];
         [self setUpButtonInButtonsView];
         [self settingView];
         [self addProgressTimer];
@@ -98,6 +110,16 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     }
 }
 #pragma mark - viewLoadAndLayout
+- (void)loadView {
+    HCPlayingCustomView *view = [[HCPlayingCustomView alloc] initWithFrame:CGRectMake(0, 0, HCScreenWidth, HCScreenHeight)];
+    view.dismissBlock = ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    self.view = view;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -109,6 +131,12 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     [self settingView];
     [self addProgressTimer];
     [self addLrcTimer];
+    
+//    BOOL firstTimeInPage = [GVUserDefaults standardUserDefaults].firstTimeInPage;
+//    if (firstTimeInPage) {
+        [self setUPShimmerView];
+//        [GVUserDefaults standardUserDefaults].firstTimeInPage = NO;
+//    }
 }
 - (void)setUpView
 {
@@ -128,6 +156,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.delegate = self;
     scrollView.scrollEnabled = YES;
+    scrollView.pagingEnabled = YES;
     [self.view addSubview:scrollView];
     self.lrcScrollView = scrollView;
     self.lrcScrollView.contentSize = CGSizeMake(HCScreenWidth * 2 , 0);
@@ -142,6 +171,26 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     [self.view addSubview:slider];
     self.progressSlider = slider;
 }
+
+- (void)setUPShimmerView{
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] init];
+    shimmeringView.shimmering = YES;
+    shimmeringView.shimmeringBeginFadeDuration = 0.3;
+    shimmeringView.shimmeringOpacity = 0.3;
+    shimmeringView.shimmeringSpeed = 150;
+    shimmeringView.shimmeringDirection = FBShimmerDirectionLeft;
+    [self.view addSubview:shimmeringView];
+    _shimmeringView = shimmeringView;
+    
+    UILabel *tipsLable = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
+    tipsLable.text = @"滑动图片切换歌词";
+    tipsLable.font = [UIFont systemFontOfSize:16];
+    tipsLable.textColor = [UIColor blackColor];
+    tipsLable.textAlignment = NSTextAlignmentCenter;
+    tipsLable.backgroundColor = [UIColor clearColor];
+    shimmeringView.contentView = tipsLable;
+}
+
 - (void)setUpLabelInButtonsView
 {
     self.currentTimeLabel = [HCCreatTool labelWithView:self.buttonsView size:CGSizeMake(40, 20)];
@@ -184,7 +233,7 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
     [self.playModeButton addTarget:self action:@selector(playModeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.playModeButton.tag = CycleMode;
     
-    self.downloadButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"cm2_lay_icn_dld"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
+    self.downloadButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"music_distinguish_selection_download"] state:UIControlStateNormal size:CGSizeMake(25, 25)];
     [self.downloadButton addTarget:self action:@selector(clickDownLoadButton) forControlEvents:UIControlEventTouchUpInside];
     
     self.moreChoiceButton = [HCCreatTool buttonWithView:self.buttonsView image:[UIImage imageNamed:@"icon_ios_more_filled"] state:UIControlStateNormal size:CGSizeMake(30, 30)];
@@ -228,6 +277,13 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 }
 - (void)layoutLabelAndButtons
 {
+    [self.shimmeringView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(self.progressSlider.mas_bottom).offset(10);
+        make.width.equalTo(@150);
+        make.height.equalTo(@15);
+    }];
+    
     [self.songNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.currentTimeLabel.mas_bottom).offset(HCCommonSpacing);
@@ -376,6 +432,10 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 {
     HCLog(@"BackMenu");
     [self dismissViewControllerAnimated:YES completion:^{
+        if (self.shimmeringView) {
+            self.shimmeringView.hidden = YES;
+            [self.shimmeringView removeFromSuperview];
+        }
         [self refreshIndicatorViewState];
     }];
 }
@@ -422,7 +482,18 @@ static void *IndicatorStateKVOKey = &IndicatorStateKVOKey;
 - (void)clickDownLoadButton
 {
     HCLog(@"下载");
-    [HCPromptTool promptModeText:@"功能正在完善" afterDelay:1.0];
+//    [HCPromptTool promptModeText:@"功能正在完善" afterDelay:1.0];
+//    NSURL *songURL = [NSURL URLWithString:self.currentMusic.songLink];
+//    [[HCDownLoadManager shareInstance] downLoadWithURL:songURL downLoadInfo:^(long long fileSize) {
+//        [HCModelOperationTool saveModel:self.currentMusic withUserID:nil];
+//    } success:^(NSString *cacheFilePath) {
+//        self.currentMusic.isDownLoaded = YES;
+//        [HCModelOperationTool saveModel:self.currentMusic withUserID:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCache" object:nil];
+//    } failed:^(NSString *msg) {
+//        [HCModelOperationTool saveModel:self.currentMusic withUserID:nil];
+//    }];
+    
 }
 
 - (void)clickMoreChoiceButton

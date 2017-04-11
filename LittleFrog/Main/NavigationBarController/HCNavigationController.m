@@ -59,7 +59,6 @@
     self.navigationBar.tintColor = HCTintColor;
     [self.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
-    self.tabBarController.tabBar.hidden = NO;
     return [super popViewControllerAnimated:animated];
 }
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated

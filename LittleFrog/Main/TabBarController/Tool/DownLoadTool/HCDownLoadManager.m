@@ -50,6 +50,10 @@ static HCDownLoadManager *_shareInstance;
     [self downLoadWithURL:url downLoadInfo:nil progress:progressBlock state:nil success:successBlock failed:failBlock];
 }
 
+- (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
+    [self downLoadWithURL:url downLoadInfo:downLoadBlock progress:nil state:nil success:successBlock failed:failBlock];
+}
+
 - (void)downLoadWithURL: (NSURL *)url downLoadInfo: (DownLoadInfoType)downLoadBlock progress:(DownLoadProgressType)progressBlock state:(DownLoadStateChangeType)stateBlock success: (DownLoadSuccessType)successBlock failed: (DownLoadFailType)failBlock {
     
     NSString *md5 = [url.absoluteString md5Str];

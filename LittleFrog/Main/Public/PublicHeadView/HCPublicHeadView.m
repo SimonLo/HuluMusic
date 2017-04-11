@@ -196,7 +196,7 @@
         make.left.equalTo(self.mas_left);
         make.bottom.equalTo(self.mas_bottom);
         make.right.equalTo(self.mas_right);
-        make.height.mas_offset(60);
+        make.height.mas_offset(65);
     }];
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(HCHorizontalSpacing);

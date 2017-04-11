@@ -7,58 +7,43 @@
 //
 
 #import "HCMineSongController.h"
+#import "HCDownLoadListernDataTool.h"
+#import "HCSingleSongCellVM.h"
 #import "HCSingleSongCell.h"
+#import "HCMusicModel.h"
 
-@interface HCMineSongController ()<UITableViewDataSource,UITableViewDelegate>
-
-@property (nonatomic,weak) UITableView *tableView;
-
-@end
-
-
-static NSString *const singleSongID = @"singleSongID";
 @implementation HCMineSongController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+- (void)reloadCache {
     
-    [self setupTableView];
+    NSArray <HCMusicModel *>*downLoadingMs = [HCDownLoadListernDataTool getDownLoadingMusicMs];
+    NSMutableArray <HCSingleSongCellVM *>*downLoadingVMs = [NSMutableArray arrayWithCapacity:downLoadingMs.count];
+    for (HCMusicModel *downLoadingM in downLoadingMs) {
+        HCSingleSongCellVM *vm = [HCSingleSongCellVM new];
+        vm.mucicV = downLoadingM;
+        [downLoadingVMs addObject:vm];
+    }
     
-}
-
-- (void)setupTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [tableView registerClass:[HCSingleSongCell class] forCellReuseIdentifier:singleSongID];
-    [self.view addSubview:tableView];
-    _tableView = tableView;
-    
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(self.view);
+    __weak typeof(self) weakSelf = self;
+    [self setUpWithDataList:downLoadingVMs getCell:^UITableViewCell *(NSIndexPath *indexPath) {
+        return [HCSingleSongCell cellWithTableView:weakSelf.tableView];
+    } getCellHeight:^CGFloat(NSIndexPath *indexPath) {
+        return 100;
+    } andBind:^(id model, UITableViewCell *cell) {
+        HCSingleSongCellVM *vm = (HCSingleSongCellVM *)model;
+        HCSingleSongCell *singSongCell = (HCSingleSongCell *)cell;
+        [vm bindWithCell:singSongCell];
+        
     }];
-
+    
+    
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self reloadCache];
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HCSingleSongCell *cell = [tableView dequeueReusableCellWithIdentifier:singleSongID];
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd",indexPath.row];
-    return cell;
-}
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -10,4 +10,8 @@
 
 @interface HCSingleSongCell : UITableViewCell
 
+@property (nonatomic,weak) UILabel *titleLable;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @end

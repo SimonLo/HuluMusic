@@ -135,6 +135,7 @@
         }
         cell.imageView.image = [UIImage imageNamed:@"ic_search_history"];
         cell.textLabel.text = self.historyArray[indexPath.row];
+        cell.textLabel.font = HCBigFont;
         cell.textLabel.textColor = [UIColor grayColor];
         return cell;
     }
